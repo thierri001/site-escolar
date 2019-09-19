@@ -1,0 +1,250 @@
+body{
+  padding-top: 4.6rem;
+}
+
+.content-page{
+  height: 100%;
+}
+
+body.background-blog{
+  background-color: #f8f9fa;
+}
+
+.bg-blog{
+  background-color: #330303;
+}
+.bg-blog-mod{
+  background-color: #770909;
+}
+.wrap-categoria-assunto{
+  background-color: whitesmoke;
+  border: 0.1rem solid rgb(140, 28, 49) !important;
+}
+
+/* .bg-marcha{
+  background-image: url(/res/back-em-marcha.jpg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+} */
+
+/* .row-assuntos{
+  max-height: 88vh;
+  overflow-y: scroll;
+} */
+
+/* .row-pesquisa{
+  max-height: 78vh;
+  overflow-y: scroll;
+} */
+
+/* .row-content{
+  height: 88vh;
+} */
+
+.col-pesq-categoria{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.bg-content{
+  height: 100%;
+  width: 100%;
+}
+
+.bg-categoria{
+  /* background-color: #a81515; */
+  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.75);
+}
+
+.btn-assunto.text-master,
+a.btn-assunto{
+  color:#000000 !important;
+  background-color: rgba(0, 0, 0, 0.029);
+  display: flex;
+}
+
+a.btn-assunto:hover,
+a.btn-assunto.text-master:hover{
+  background-color: rgba(47, 47, 47, 0.05);
+}
+
+.col-blog{
+  flex-wrap: unset !important;
+}
+
+.col-comentario{
+  height: 88%;
+  background-color: #f2f3f4;
+}
+
+.comment{
+  height: fit-content;
+}
+
+.row-elem{
+  width: 100%;
+  min-height: 100vh;
+}
+
+.fonte-4{
+  font-size: 1.8rem !important;
+}
+
+.fonte-5{
+  color:#8b0000 !important;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+}
+
+.font-roboto{
+  color: rgb(235, 235, 235);
+}
+
+.underline-text{
+  margin-top: -0.9rem;
+}
+.back-post{
+  background-color: rgb(80, 4, 4) !important;
+  color: #FFF !important;
+}
+
+.img-user-blog{
+  border: 1px solid rgba(114, 5, 5, 0.753);
+  width: 3.1rem;
+  height: 3.3rem;
+}
+
+.img-autor-post{
+  width: 3rem; 
+  height: 3rem;
+}
+
+.a-form-blog:hover{
+  color: rgb(221, 221, 221) !important;
+}
+
+.btn-form-blog{
+  background-color: rgba(204,0,0,1);
+  color: white !important;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-form-blog:hover{
+  background-color:rgb(156, 5, 5) !important;
+}
+
+.blog-col-max{
+  max-height: 33rem;
+}
+
+a.btn-post-blog:hover{
+  color:rgb(156, 5, 5) !important;
+}
+
+.btn-trofeu:hover{
+  color: rgb(124, 124, 0);
+}
+
+.blog-search{
+  background-color: rgba(47, 37, 37, 0.46);
+}
+
+.container-post{
+  background-color: rgba(47, 47, 47, 0.02);
+}
+
+.container-post:hover{
+  background-color: rgba(47, 47, 47, 0.05);
+}
+
+a.btn-perfil:hover{
+  color: #8B0000 !important;
+}
+
+.font-blog-posts{
+  font-family: 'Varela Round', sans-serif;
+}
+
+.post-config{
+  border: 1px solid rgb(75, 73, 73);
+  box-shadow: 0 0 1px 0px #5f5e5e inset, 0 0 1px 0px #1d1c1c;
+}
+
+.post-config:hover{
+  border: 1px solid rgb(150, 145, 145)
+}
+
+.btn-post-destaque{
+  background-color: #ececec;
+  color: rgb(0, 0, 0);
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-post-destaque:hover{
+  background-color:rgb(179, 0, 0) !important;
+  color: white;
+}
+
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  /* .border-md-right{
+    
+  } */
+}
+
+@media only screen and (min-width: 610px){
+  .fonte{
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-device-aspect-ratio: 13/18){
+  iframe.note-video-clip{
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px){
+.row-elem{
+  align-content: baseline;
+}
+}
+
+@media only screen and (min-width: 992px){
+  .main{
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width:1500px){
+  html{
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width:1900px){
+  html{
+    font-size: 1.4rem;
+  }
+}

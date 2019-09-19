@@ -1,0 +1,18 @@
+/* Acima do tamanho celular tablet peq */
+/* navbar > align-content-md-end   */
+@media only screen and (min-width: 992px){
+    body {
+      padding-top: 10rem;
+    }
+    .fonte{
+      font-size: 4rem;
+    }
+    .navbar {
+        height: 10rem;
+        box-shadow: none;
+        border-top: none;
+    }
+    .navbar-nav .nav-item .nav-link, .dropdown .nav-link{
+        font-size: 0.98rem !important;
+    }
+}
