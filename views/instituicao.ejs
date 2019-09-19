@@ -1,0 +1,43 @@
+<% include ./partials/header.ejs %>
+<div class="main instituicao">
+    <div class="container">
+<% if(Institucional.length >0){ %>
+    <div class="bg-light bg-institu px-3 mb-5 mb-md-0">
+<% Institucional.forEach((texto)=>{ %>
+        <% if(texto.id === principal){ %>
+        <div class='row mt-5'>
+        <div class='col-md-1'></div>
+            <div class='col-md-10'>
+                <h2 class='text-center font-roboto'><%= texto.titulo %></h2>
+                <p class='text-left font-roboto'><%= texto.descricao %></p>
+            </div>
+        <div class='col-md-1'></div>
+        </div>
+        <% } %>
+<% }) %>
+<div class='row'>
+<% Institucional.forEach((texto)=>{ %>
+        <% if(texto.id === descricao1){ %>
+            <div class='col-md-4'>
+                <h2 class='text-center font-roboto'><%= texto.titulo %></h2>
+                <p class='text-left font-roboto'><%= texto.descricao %></p>
+            </div>
+        <% } %>
+        <% if(texto.id === descricao2){ %>
+            <div class='col-md-4'>
+                <h2 class='text-center'><%= texto.titulo %></h2>
+                <p><%= texto.descricao %></p>
+            </div>
+        <% } %>
+        <% if(texto.id === descricao3){ %>
+            <div class='col-md-4'>
+                <h2 class='text-center'><%= texto.titulo %></h2>
+                <p><%= texto.descricao %></p>
+            </div>
+        <% } %>
+<% }) %>
+</div>
+</div>
+<% } %>
+</div>
+<% include ./partials/footer.ejs %>

@@ -1,0 +1,57 @@
+<% include ./partials/header %>
+<div class="main">
+    <div class='row justify-content-center m-0 m-lg-5'>
+    <h1 class='text-center m-5'>Bem vindo(a) <%= currentUser.username %>!</h1>
+    <ul class='row justify-content-center text-center align-items-center p-0 m-0 m-lg-5'>
+        <% if (currentUser.isAdmin || currentUser.permissaoHome) { %>
+        <li>
+        <a href="/admin/home" class='cmbtn btn btn-gerenciamento m-1'><i class="fas fa-home p-1"></i>Home</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoInstituicao) { %>
+        <li>
+        <a href="/admin/edit/instituicao" class='cmbtn btn btn-gerenciamento m-1'><i class="fas fa-graduation-cap p-1"></i>Instituicao</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoEventos) { %>
+        <li>
+        <a href="/admin/edit/eventos" class='cmbtn btn btn-gerenciamento m-1'><i class="far fa-calendar-alt p-1"></i>Eventos</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoContato) { %>
+        <li>
+        <a href="/admin/edit/contato" class='cmbtn btn btn-gerenciamento m-1'><i class="far fa-address-card p-1"></i>Contato</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoEnsino) { %>
+        <li>
+        <a href="/admin/edit/ensino" class='cmbtn btn btn-gerenciamento m-1'><i class="fas fa-book p-1"></i>Ensino</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoDiferenciais) { %>
+        <li>
+        <a href="/admin/edit/diferencial" class='cmbtn btn btn-gerenciamento m-1'>Diferenciais</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoMensagens) { %>
+        <li>
+        <a href="/admin/mensagens" class='cmbtn btn btn-gerenciamento m-1'>Mensagens</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoUsuarios) { %>
+        <li>
+        <a href="/admin/edit/usuarios/" class='cmbtn btn btn-gerenciamento m-1'>Usuários</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoPaginas) { %>
+        <li>
+        <a href="/admin/edit/paginas" class='cmbtn btn btn-gerenciamento m-1'><i class="far fa-file p-1"></i>Criar páginas</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoBlog) { %>
+        <li>
+        <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'><i class="far fa-file p-1"></i>Blog</a>
+        </li>
+        <% } if(currentUser.isAdmin || currentUser.permissaoDever) { %>
+        <li>
+            <a href="/admin/dever" class='btn btn-gerenciamento m-1'><i class="fas fa-user-edit pr-1"></i>Dever</a>
+        </li>
+        <% } %>
+        <li>
+        <a href="/logout" class='cmbtn-page btn btn-gerenciamento m-1'>Sair</a>
+        </li>
+    </ul>
+    </div>
+</div>
+<% include ./partials/footer %>

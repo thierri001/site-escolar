@@ -1,0 +1,102 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h2 class='text-center my-4'>Permissões para o usuário: <strong><%= usuario.username %></strong></h2>
+    <form data="/admin/<%= usuario._id %>/permissoes" id="update">
+        <h1 class='text-center' >Permissões</h1>
+        <div class="row justify-content-center">
+            <div class='col-md-3 text-center'>
+            <div class="form-group m-0">
+            <label>Home</label>
+            <% if(usuario.permissaoHome){ %>
+            <input type="checkbox" name="home" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="home">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Páginas</label>
+            <% if(usuario.permissaoPaginas){ %>
+            <input type="checkbox" name="paginas" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="paginas">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Contato</label>
+            <% if(usuario.permissaoContato){ %>
+            <input type="checkbox" name="contato" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="contato">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Instituicao</label>
+            <% if(usuario.permissaoInstitucional){ %>
+            <input type="checkbox" name="instituicao" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="instituicao">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Eventos</label>
+            <% if(usuario.permissaoEventos){ %>
+            <input type="checkbox" name="eventos" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="eventos">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Ensino</label>
+            <% if(usuario.permissaoEnsino){ %>
+            <input type="checkbox" name="ensino" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="ensino">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Diferenciais</label>
+            <% if(usuario.permissaoDiferenciais){ %>
+            <input type="checkbox" name="diferencial" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="diferencial">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Mensagens</label>
+            <% if(usuario.permissaoMensagens){ %>
+            <input type="checkbox" name="mensagens" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="mensagens">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Usuarios</label>
+            <% if(usuario.permissaoUsuarios){ %>
+            <input type="checkbox" name="usuarios" <%= 'checked' %> >
+            <% } else { %>
+            <input type="checkbox" name="usuarios">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+            <label>Blog</label>
+            <% if(usuario.permissaoBlog){ %>
+                <input type="checkbox" name="blog" <%= 'checked' %> >
+            <% } else { %>
+                <input type="checkbox" name="blog">
+            <% } %>
+            </div>
+            <div class="form-group m-0">
+                <label>Dever</label>
+                <% if(usuario.permissaoDever){ %>
+                    <input type="checkbox" name="dever" <%= 'checked' %> >
+                <% } else { %>
+                    <input type="checkbox" name="dever">
+                <% } %>
+            </div>
+            <button class='btn p-0 text-center'><i class="far fa-save fa-2x"></i></button>
+            </div>
+        </div>
+    </form>
+    <a href='/admin/edit/usuarios' class='cmbtn'>Voltar</a>
+</div>
+<% include ../../partials/footer %>

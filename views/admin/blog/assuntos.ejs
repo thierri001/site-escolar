@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+<div class="main">
+        <h1 class='text-center m-5'>Criação de assunto para - <%- categoria.categoria %></h1>
+        <div class="form-document row justify-content-center border border-secondary">
+            <h2 class='text-center'>Novo assunto</h2>
+            <div class="form-group m-2 text-center col-12">
+                <form data="/admin/blog/<%=categoria._id%>/assuntos" id='new' class='col-md-3 m-auto'>
+                <input type="text" placeholder='Assunto' name='assunto' class='col-12' required>
+                <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+    <% if(assuntos !== undefined){ %>
+        <% if(assuntos.length > 0) { %>
+        <div class="container-assuntos">
+            <% assuntos.forEach((assunto)=>{ %>
+                <div class="container-elemento">
+                    <div class="row p-2 align-items-center justify-content-between m-2">
+                        <div class='col-md col-6'><h5><span class='pr-2'><%-assunto.icone%></span><%= assunto.assunto %></h5></div>
+                        <form data="/admin/blog/<%=categoria._id%>/<%=assunto._id%>/icone" class='col-md text-center' id='update'>
+                            <input type="text" placeholder='Icone' name='icone' class='col-12' required>
+                            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                        </form>
+                        <form class='col-md col-6 text-right'>
+                            <button class='btn btn-delete deletar p-0' data='/admin/blog/assuntos/<%=categoria._id%>/<%=assunto._id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+    <% } %>
+    <% } %>
+    <div class="row justify-content-center">
+            <a href="/admin/blog/categorias" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ../partials/footer %>

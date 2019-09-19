@@ -1,0 +1,18 @@
+<% include ../../partials/header %>
+    <div class="main">
+    <h1 class='text-center m-5'>Diferencial</h1>
+    <form data="/admin/diferencial/new" id='new' class='m-3 text-center col-md-5 mx-auto'>
+        <div class="form-group text-center">
+            <h4>Escolha um título para o diferencial</h4>
+            <input class="form-control m-1" type="text" name="titulo" placeholder="Título" required/>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control m-1" name="descricao" id="" cols="50" rows="10" placeholder="Descrição"></textarea>
+        </div>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </form>
+    <div class="row justify-content-center">
+            <a href='/admin/edit/diferencial' class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ../../partials/footer %>

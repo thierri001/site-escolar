@@ -1,0 +1,72 @@
+<!-- /blog/post/new POST cria -->
+<% include ./partials/header %>
+<div class="main">
+  <div class="col w-100">
+    <form data="/blog/post/new" id="newSummer" class='col-md-9 px-lg-5 mx-auto mt-4'>
+      <div class="text-center col-md-4 mx-auto mb-2">
+        <input class='form-control' type="text" name="titulo" placeholder="Título do post" maxlength="28" required="true" class='m-1'/>
+      </div>
+      <textarea id="summernote" name="texto"></textarea>
+      <div class="form-group m-1">
+        <textarea name="descricao" class="form-control m-1" rows='3' maxlength="120" placeholder="Descrição do post"></textarea>
+        <label for="assunto">Assunto: </label>
+        <select name="assunto">
+            <% assuntos.forEach((assunto)=>{ %>
+                <option value="<%=assunto.assunto%>"><%= assunto.assunto %></option>
+            <% }) %>
+        </select>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+      </div>
+    </form>
+    <div class="row justify-content-center">
+      <a href="/blog" class='btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+  </div>
+    <script>
+        $33('#summernote').summernote({
+            placeholder: 'Conteúdo do post!',
+            lang: 'pt-BR',
+            tabsize: 2,
+            height: 180,
+            disableDragAndDrop: true,
+            toolbar: [['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']]],
+            callbacks: {
+                    onKeydown: function (e) { 
+                        var max = 2000;
+                        var t = e.currentTarget.innerText; 
+                        if (t.trim().length >= max) {
+                            //delete keys, arrow keys, copy, cut
+                            if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                            e.preventDefault(); 
+                        } 
+                    },
+                    onKeyup: function (e) {
+                        var max = 2000;
+                        var t = e.currentTarget.innerText;
+                        $('#maxContentPost').text(max - t.trim().length);
+                    },
+                    onPaste: function (e) {
+                        var max = 2000;
+                        var t = e.currentTarget.innerText;
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        var maxPaste = bufferText.length;
+                        if(t.length + bufferText.length > max){
+                            maxPaste = max - t.length;
+                        }
+                        if(maxPaste > 0){
+                            document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                        }
+                        $('#maxContentPost').text(max - t.length);
+                    }
+                }
+          });
+    </script>
+</div>
+<% include ./partials/footer %>

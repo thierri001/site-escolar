@@ -1,0 +1,113 @@
+<% include ./partials/header.ejs %>
+<div class="main main-auto">
+    <div class="container">
+    <div class="bg-master">
+    <h1 class='text-center py-5 fonte-2 master overflow-hidden bg-font-master'>Colaboradores <img src="/uploads/icone-escola.png" alt="" class='back-escola-master img-fluid'></h1>
+<% if(equipe1.gestores != undefined){ %>
+<% var gestorCounter = 0; %>
+<div class="row justify-content-center mb-3 py-5 bg-font-master bg-gestores">
+<h2 class='text-center col-12 fonte-4 master'><%=equipe1.titulo%></h2>
+<% equipe1.gestores.forEach((gestor)=>{ %>
+<% if(gestorCounter < 4){ %>
+    <div class="col-6 col-md-3 mt-4 text-center">
+        <img src="<%=gestor.url%>" class="rounded-circle" style="width:80%">
+        <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+    </div>
+<% } gestorCounter++; %>
+<% }); %>
+</div>
+<% } %>
+<% if(equipe2.gestores != undefined){ %>
+<% var gestorCounter = 0; %>
+<div class="row justify-content-center mb-3 bg-font-master bg-gestores">
+<h2 class='text-center col-12 m-2 fonte-4 master'><%=equipe2.titulo%></h2>
+<% equipe2.gestores.forEach((gestor)=>{ %>
+<% if(gestorCounter < 4){ %>
+    <div class="col-6 col-md-3 mt-4 text-center">
+        <img src="<%=gestor.url%>" class="rounded-circle" style="width:80%">
+        <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+    </div>
+<% } gestorCounter++; %>
+<% }); %>
+</div>
+<% } %>
+<% if(equipe3.gestores != undefined){ %>
+<% var gestorCounter = 0; %>
+<div class="row justify-content-center mb-3 bg-font-master bg-gestores">
+<h2 class='text-center col-12 fonte-4 master'><%=equipe3.titulo%></h2>
+<% equipe3.gestores.forEach((gestor)=>{ %>
+<% if(gestorCounter < 4){ %>
+    <div class="col-6 col-md-3 mt-4 text-center"> 
+    <img src="<%=gestor.url%>" class="rounded-circle" style="width:80%">
+        <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+    </div>
+<% } gestorCounter++; %>
+<% }); %>
+</div>
+<% } %>
+<% if(equipes.length > 0){ %>
+<% equipes.forEach((equipe)=>{ %>
+    <% if(equipe.gestores !== undefined){ %>
+        <% var gestorCounter = 0; %>
+        <% var active = true; %>
+        <% var gestorCounteri = 0; %>
+        <% if(equipe.gestores.length >= 5){ %>
+            <h2 class='text-center col-12 m-3 fonte-4 master bg-font-master'><%=equipe.titulo%></h2>
+            <div id="carouselExampleFade" class="carousel slide carousel-fade mb-5" data-ride="carousel">
+                    <div class="carousel-inner  bg-font-master">
+                        <% equipe.gestores.forEach((gestor)=>{ %>
+                            <% if(gestorCounter === 0 && active){ %>
+                            <div class="carousel-item active rounded-bottom">
+                                <div class="row">
+                            <% } %>
+                            <% if(gestorCounter === 0 && !(active)){ %>
+                                <div class="carousel-item rounded-bottom">
+                                <div class="row">
+                            <% } %>
+                            <% if(gestorCounter <= 4){ %>
+                                    <div class="text-center d-inline-block col-3 p-0 m-0"> 
+                                    <img src="<%=gestor.url%>" class="img-fluid border border-light">
+                                        <strong><h6 class='text-center font-roboto'><%= gestor.nome %></h6></strong>
+                                    </div>
+                                    <% gestorCounter++; %>
+                                    <% gestorCounteri++; %>
+                            <% } %>
+                            <% if(gestorCounter === 4 || gestorCounteri === equipe.gestores.length){ %>
+                            </div>
+                            </div>
+                            <% gestorCounter = 0; %>
+                            <% active = false; %>
+                            <% } %>
+                        <% }); %>
+                    <!-- <div class="carousel-item border border-dark rounded-bottom">
+                        <img class="d-block w-100 rounded-bottom" src="" alt="">
+                    </div> -->
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                    <i class="fas fa-chevron-left fa-2x pr-5 mr-2" aria-hidden="true"></i>
+                    <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                    <i class="fas fa-chevron-right fa-2x pl-5 ml-2" aria-hidden="true"></i>
+                    <span class="sr-only">Próximo</span>
+                    </a>
+            </div>
+        <% }else{ %>
+            <div class="row justify-content-center mb-3">
+            <h2 class='text-center col-12'><%=equipe.titulo%></h2>
+            <% equipe.gestores.forEach((gestor)=>{ %>
+            <% if(gestorCounter < 4){ %>
+                <div class="col-md-3 mt-4 text-center"> 
+                <img src="<%=gestor.url%>" class="rounded-circle" style="width:80%">
+                    <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+                </div>
+            <% } gestorCounter++; %>
+            <% }); %>
+        </div>
+        <% } %>
+        <% } %>
+<% }); %>
+<% } %>
+    </div>
+</div>
+<% include ./partials/footer.ejs %>

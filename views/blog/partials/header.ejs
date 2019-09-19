@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt" dir='ltr'>
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142312292-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-142312292-1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% if(locals.descricaoPost){ %>
+    <meta content='<%=descricaoPost%>' name='description'>
+    <% }else{ %>    
+    <meta content='Blog Master é uma comunidade de alunos em busca do conhecimento! Fundado pela Escola Master - Brasília.' name='description'>
+    <% } %>
+    <title><%- h_title %></title>
+    <link async href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <link rel="icon" href="/res/icone-logo2.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- MATERIAL ICONS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog.css">
+    <link rel="canonical" href="/blog">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script>
+            var $ = jQuery.noConflict();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+            var $33 = jQuery.noConflict();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <% if(currentUser){ %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    <script type="text/javascript" src="/js/admin/summernote-pt-BR.js"></script>
+    <% }else { %>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    <script async type="text/javascript" src="/js/admin/summernote-pt-BR.js"></script>
+    <% } %>
+</head>
+    <body class='background-blog'>
+    <div class="page">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-blog m-0 p-0">
+    	  <a class="navbar-brand m-auto p-2 p-sm-2 px-md-0 p-xl-2 cmbtn" data-toggle="Colégio Master" href="/blog"><span class="fonte fonte-3 colegio">Blog</span><span class="fonte fonte-3 master-2">Master</span></a>
+    	  <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	    <span class='icon-nav'><i class="fas fa-bars"></i></span>
+    	  </button>
+        	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+        	    <ul class="navbar-nav ml-auto">
+                <% if(currentUser && currentUser.tipo === 1){ %>
+                    <form class="form-inline my-2 pt-2 my-lg-0 d-none d-lg-flex text-center order-1" data='/blog/search' id='procura-desk'>
+                        <button class="btn my-2 my-sm-0 text-white d-none" type="submit"><i class="fas fa-search pr-1"></i></button>
+                            <input name='procura' class="form-control mr-sm-2 blog-search" type="search" placeholder="Procurar post" aria-label="Search" required>
+                    </form>
+                    <li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-2">
+                        <a class="nav-link nav-2 p-1 cmbtn"  id='selector' href="/blog"><i class="fas fa-home p-1"></i>Posts</a>
+                    </li>
+                    <li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-3">
+                            <a class="nav-link nav-2 p-1 cmbtn"  id='selector' href="/blog/perfil">Perfil</a>
+                    </li>
+                    <li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-4">
+                            <a class="nav-link nav-2 p-1 cmbtn2"  id='selector' href="/blog/post/new">Criar Post</a>
+                    </li>
+                    <li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-5">
+                            <a class="nav-link nav-2 p-1"  id='selector' href="/blog/logout">Logout</a>
+                    </li>
+                    <li class="nav-item p-2 m-auto pt-lg-3 order-6">
+                        <img src="<%= currentUser.foto %>" class="rounded-circle img-user-blog">
+                    </li>
+                <% } else { %>
+                    <li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-lg-3">
+                        <a class="nav-link nav-2 p-1"  id='selector' href="/home"><i class="fas fa-home p-1"></i>Site</a>
+                    </li>
+        	     	<li class="nav-item px-sm-2 px-md-0 px-xl-2 pt-4 order-lg-2">
+        	        	<a class="nav-link nav-2 p-1 cmbtn"  id='selector' href="/blog"><i class="far fa-comments p-1"></i>Posts</a>
+                     </li>
+                     <form class="form-inline my-2 pt-2 ml-4 my-lg-0 d-none d-lg-flex text-center order-4" data='/blog/search' id='procura-desk'>
+                         <button class="btn my-2 my-sm-0 text-white d-none" type="submit"><i class="fas fa-search pr-1"></i></button>
+                            <input name='procura' class="form-control mr-sm-2 blog-search" type="search" placeholder="Procurar post" aria-label="Search" required>
+                        </form>
+        		    <li class="dropdown pt-4 pb-2 px-sm-1 px-md-0 px-lg-2 order-lg-1 d-none d-lg-flex">
+                        <a href="#" class="nav-link nav-2 p-1 mb-2" data-toggle="modal" data-target="#ModalLogin"><i class="far fa-user"></i> Logar</a>
+                    </li>
+
+                    <li class="dropdown pt-4 pb-2 px-sm-1 px-md-0 px-lg-2 order-lg-1 d-lg-none">
+                            <a id="botaoToggler" href="#" class="nav-link nav-2 p-1 mb-2"><i class="far fa-user"></i> Logar</a>
+                            <ul class="dropdown-menu mt-1 w-100 bg-blog border-none" style="display:none; min-width: 190px;">
+                                <div class="col-lg-12 bg-blog">
+                                    <div class="text-center text-white"><h3><b>Login</b></h3></div>
+                                    <form id="ajax-login-form" class="text-white" action="/blog/login" method="post" autocomplete="off">
+                                        <div class="form-group mx-5 mx-md-0">
+                                            <label for="username">Usuário</label>
+                                            <input type="text" ng-model="login" data-nome="Usuario" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuário" value="" autocomplete="off">
+                                        </div>
+                                        <div class="form-group mx-5 mx-md-0">
+                                            <label for="password">Senha</label>
+                                            <input type="password" ng-model="senha" data-nome="Senha" name="password" id="password" tabindex="2" class="form-control" placeholder="Senha" autocomplete="off">
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <a href="/blog/usuario/recuperarSenha" class="text-white a-form-blog">Esqueci minha senha</a>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <a href="/blog/usuario/new" class="text-white a-form-blog">Ainda não tem conta? Se cadastre!</a>
+                                        </div>
+                                            <button form="ajax-login-form" class="nav-link nav-2 py-2 px-4 m-auto rounded text-center btn btn-form-blog">Entrar</button>
+                                    </form>
+                                </div>
+                            </ul>
+                        </li>
+
+                <% } %>
+        		</ul>
+        	</div>
+        </nav>
+        <div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="tituloLogin" aria-hidden="true">
+            <div class="modal-dialog mx-auto mt-5" role="document">
+                <div class="modal-content" style="max-width: 600px;">
+                    <div class="modal-body p-0">
+                        <div class="col-lg-12 bg-blog-mod p-3">
+                            <form id="ajax-login-form-mod" class='text-white' action="/blog/login" method="post" autocomplete="off">
+                                <div class="form-group mx-5 mx-md-0">
+                                    <label for="username">Usuário</label>
+                                    <input type="text" ng-model="login" data-nome="Usuario" name="username" id="username-mod" tabindex="1" class="form-control" placeholder="Usuário" value="" autocomplete="off">
+                                </div>
+                                <div class="form-group mx-5 mx-md-0">
+                                    <label for="password">Senha</label>
+                                    <input type="password" ng-model="senha" data-nome="Senha" name="password" id="password-mod" tabindex="2" class="form-control" placeholder="Senha" autocomplete="off">
+                                </div>
+                                <div class="form-group text-center">
+                                    <a href="/blog/usuario/recuperarSenha" class='text-white a-form-blog'>Esqueci minha senha</a>
+                                </div>
+                                <div class="form-group text-center">
+                                    <a href="/blog/usuario/new" class='text-white a-form-blog'>Ainda não tem conta? Se cadastre!</a>
+                                </div>
+                                    <button form="ajax-login-form-mod" class='nav-link nav-2 py-2 px-4 m-auto rounded text-center btn btn-form-blog'>Entrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-page">
+        <div class="page-main">
+        <noscript>
+                <div class="row justify-content-md-center text-center fixed-top m-0">
+                    <div class="alert alert-danger col-md-12 text-center" role="alert">Ative o javascript para continuar. =)</div>
+                </div>
+        </noscript>
+    	<% if(error && error.length > 0){ %>
+            <div class="row justify-content-md-center fixed-top mt-xl-1">
+                <div class="alert alert-danger alert-bar-top col-md-10 text-center" role="alert"><%=error%></div>
+            </div>
+            <% } %>

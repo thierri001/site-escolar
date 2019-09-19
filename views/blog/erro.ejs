@@ -1,0 +1,11 @@
+<% include ./partials/header-erro.ejs %>
+<div class='main'>
+<% if(locals.message){ %>
+    <p class='text-center'>Ocorreu um erro ao fazer sua solicitação! Por favor contate o administrador com esse código:</p><br>
+    <p class='text-center'><%=message%></p>
+<% } else { %>
+<div class="container">
+<h1 class='text-center'>Ocorreu um erro ao fazer sua solicitação! A página pode não existir mais! =(</h1>
+<% } %>
+</div>
+<% include ./partials/footer.ejs %>

@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'>Criação de trofeus</h1>
+    <div class="form-document row justify-content-center border border-secondary">
+        <h2 class='text-center'>Novo troféu</h2>
+        <div class="form-group m-2 text-center col-12">
+            <form data="/admin/blog/trofeus" id='sendNameModel' class='col-md-3 m-auto'>
+            <input type="text" placeholder='Título do troféu' name='nome' class='col-12' required>
+            </form>
+        </div>
+        <div class="form-group m-2 text-center col-12">
+        <form data='' dataurl="/admin/blog/trofeus/foto" id='sendArchive' class='col-md-5 m-auto'>
+            <input class="form-control-file m-2" type="file" name="image" id='input-file' required/>
+        </form>
+        </div>
+        <button form='sendNameModel' class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </div>
+    <div class="container-trofeus">
+    <% trofeus.forEach((trofeu)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center justify-content-lg-between justify-content-center m-2">
+                <img src="<%=trofeu.imagem%>" class='img-fluid' style='width:5rem'>
+                <div class='col-md col-12 text-center text-md-left'><%= trofeu.nome %></div>
+                <form class='col-md col-12 text-right'>
+                    <button class='btn btn-delete deletar p-0' data='/admin/blog/trofeus/<%=trofeu._id%>/delete'><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+    <div class="row justify-content-center pl-3">
+            <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ../partials/footer %>

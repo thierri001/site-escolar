@@ -1,0 +1,15 @@
+<main>
+    <h1><%=mes%> / <%=ano%></h1>
+    <!--envia o solicitado p servidor-->
+    <button>Anterior</button> 
+    <!--slide de fotos-->
+    <!--foto slide-->
+    <button>Proximo</button>
+    <div class='containerEventos'>
+    <% todosEventos.forEach(function(evento){ %>
+    <img src="<%=evento.capa%>"></img>
+    <h2><%=evento.titulo%></h2>
+    <p><%=evento.descricao%></p>
+    <% }) %>
+    </div>
+</main>

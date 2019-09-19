@@ -1,0 +1,21 @@
+<% include ../../partials/header %>
+    <div class="main">
+        <h1 class='text-center my-4'>Logado como <strong class='pl-2'><%= currentUser.username %></strong></h1>
+         <div class='row justify-content-center border border-secondary'>
+        <h2><%= user.username %></h2>
+        <div class="form-group m-2 text-center col-12">
+        <form data="/admin/<%= user._id %>/mudarNome" id="updateUser">
+            <input type="text" name="newUsername[username]" placeholder="Mudar nome"/>
+            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+        </form>
+        </div>
+        <div class="form-group m-2 text-center col-12">
+        <form data="/admin/<%= user._id %>/recuperarSenha" id="updateUser">
+            <input type="password" name="password" placeholder="Nova senha"/>
+            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+        </form>
+        </div>
+        </div>
+        <a href='/admin/edit/usuarios' class='cmbtn btn btn-gerenciamento m-2'>Voltar</a>
+    </div>
+<% include ../../partials/footer %>

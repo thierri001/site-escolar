@@ -1,0 +1,73 @@
+<% include ./partials/header.ejs %>
+<div class="main main-auto dever-de-casa">
+<div class="container">
+<h1 class='text-center bg-font-master up-dever'><%= mes %></h1>
+<div class="row justify-content-center">
+    <div class="col-12 calendario pb-5">
+    <ul class="row diasSemana d-none d-md-flex justify-content-center">
+        <li class='col-md'><b>Dom</b></li>
+        <li class='col-md'><b>Seg</b></li>
+        <li class='col-md'><b>Ter</b></li>
+        <li class='col-md'><b>Qua</b></li>
+        <li class='col-md'><b>Qui</b></li>
+        <li class='col-md'><b>Sex</b></li>
+        <li class='col-md'><b>Sab</b></li>
+    </ul>
+    <% e=1; %>
+    <% for (var v=1;v < elementosCalendario;v++){ %>
+        <% if(v === 1 || v===8 || v===15 || v===22 || v===29 || v===36){ %>
+        <div class="row semana">
+        <% } %>
+        <% if(v < naoTemData){ %>
+            <a class="dia-cal m-0 p-0">
+            <div class='vazio border border-secondary py-5'>
+            </div>
+            </a>
+        <% } else if (v >= diasMes+naoTemData){ %>
+            <a class="dia-cal m-0 p-0">
+                <div class='vazio border border-secondary py-5'>
+                </div>
+            </a>
+        <% } else { %>
+        <a class='dia-cal p-0' href='#' data-toggle="modal" data-target="#dever<%=e%>"> 
+            <div id='dia<%=e%>' class='dia border border-secondary text-center py-5'>
+                <div class="fonte-dia-calendario"><%= e %></div>
+            </div>
+        </a>
+        <% e++; %>
+        <% } %>
+        <!-- se final 28 e naotemdata for 0, acrescenta mais o tanto que resta -->
+        <% if(v === 7 || v===14 || v===21 || v===28 || v===35){ %>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+</div>
+</div>
+<script>
+var arr = []
+</script>
+<% dever.forEach((dever)=>{ %>
+    <script>
+    arr.push('<%= dever.date.getDate() %>');
+    </script>
+    <div class="modal fade" id="dever<%= dever.date.getDate() %>" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true" data='<%= dever.date.getDate() %>'>
+        <div class="modal-dialog mx-auto mt-5" role="document">
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="TituloModalLongoExemplo"><%= dever.date.getDate() %> de <%= mes %> de <%= dever.date.getFullYear() %></h5>
+                </div>
+                <div class="modal-body">
+                    <%- dever.texto %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
+<script>
+        arr.forEach((dia)=>{
+            document.getElementById('dia'+dia).className += ' dia-dever';
+        });
+</script>
+</div> 
+<% include ./partials/footer.ejs %>

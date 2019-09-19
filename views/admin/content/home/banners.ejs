@@ -1,0 +1,76 @@
+<% include ../../partials/header %>
+<div class="main">
+    <div id="formBanner" class='row text-center justify-content-center border border-secondary mx-md-5 p-3'>
+    <h1 class='text-center m-5'>Criação de banners</h1>
+    <form data="/admin/home/banners/" id='sendNameModel' class='m-auto col-lg-5'>
+        <div class="form-group">
+            <input class='form-control' type="text" name='nome' placeholder="Identifique o banner" required>
+        </div>
+    </form>
+    <form data='' dataurl="/admin/home/banners/" id='sendArchive' class='col-lg-5 m-auto m-2'>
+        <div class="form-group">
+            <input class="form-control-file m-2" type="file" name='image' id='input-file'>
+        </div>
+    </form>
+    <button form='sendNameModel' class='btn p-0 m-2 col-12'><i class="far fa-save fa-2x"></i></button>
+    <button href='/admin/home/banners' class='btn btn-danger cmbtn m-2'>Voltar para Banners</button>
+    <h6 class='text-center'>Sempre dê preferência a tamanhos de imagem padronizados, para um design mais elegante.</h6>
+    </div>
+    <div class="row text-center justify-content-center">
+        <a href="/admin/home" class='cmbtn btn btn-gerenciamento m-1'>Página inicial</a>
+    </div>
+    <div class="container-banner-primario" display=''>
+        <h1 class='text-center my-4'>Banners Primários</h1>
+        <a href="#" class="btn btn-secondary mudaBanner">Banners secundários</a>
+        <button class="criaBanner btn btn-gerenciamento m-1" id='primario'><i class="fas fa-plus pr-2"></i>Adicionar</button>
+        <!--substitui no container search -->
+        <!--button para criar vira um button para voltar ao search-->
+        
+        <div class="container-search">
+            <ul class='p-0'>
+            <% bannersPrincipais.forEach((banner)=>{ %>
+                <div class="container-elemento">
+                <div class="row p-2 align-items-center mb-2">
+                    <img class="col-md-4 col-12 img-fluid" src="<%= banner.url %>">
+                    <h3 class="col-md col-6 text-center"><%= banner.nome %></h3>
+                    <% if(banner.mobile){ %>
+                    <form data="/admin/home/banners/<%=banner._id%>" id='update'>
+                        <button class='btn btn-info'>Alterar para Desktop</button>
+                    </form>
+                    <% } else{ %>
+                    <form data="/admin/home/banners/<%=banner._id%>" id='update'>
+                        <button href='/admin/home/banners/<%=banner._id%>' class='btn btn-success' id='update'>Alterar para Mobile</button>
+                    </form>
+                    <% } %>
+                    <form class='text-center col-6 col-md'>
+                        <button class='btn btn-delete deletar p-0' data='/admin/home/banners/primario/<%=banner.id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                    </form>
+                </div>
+                </div>
+            <% }) %>
+            </ul>
+        </div>
+    </div>
+<!--Ao clicar em banners primarios, hidden todo conteudo de cima, e aparece esse-->
+    <div class="container-banner-secundario">
+        <h1 class='text-center my-4'>Banners Secundários</h1>
+        <a href="#" class="btn btn-info mudaBanner">Banners primários</a>
+        <button class="criaBanner btn btn-gerenciamento m-1" id='secundario'><i class="fas fa-plus pr-2"></i>Adicionar</button>
+            <div class="container-search">
+            <ul class='p-0'>
+            <% bannersSecundarios.forEach((banner)=>{ %>
+                <div class="container-elemento">
+                    <div class="row p-2 align-items-center mb-2">
+                        <img class="col-md-4 col-12" src="<%= banner.url %>">
+                       <h3 class="card-title col-md-4 col-6 text-center"><%= banner.nome %></h3>
+                        <form class='text-center col-6 col-md-4' tipo='secundario'>
+                            <button data='/admin/home/banners/secundario/<%=banner.id%>' class='btn btn-delete deletar p-0'><i class="fas fa-trash-alt fa-2x"></i></button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+<% include ../../partials/footer %>

@@ -1,0 +1,312 @@
+<% include ./partials/header.ejs %>
+<div class="main">
+<% var contador = 0; %>
+<% var contador1 = 0; %>
+<% var contadorM = 0; %>
+<% if(bannersPrincipais.length > 0){ %>
+<div id="carouselExampleFade" class="carousel slide carousel-fade bg-font-master" data-ride="carousel">
+  <div class="carousel-inner">
+    <% bannersPrincipais.forEach((banner)=>{ %>
+      <% if(contador === 0 && !banner.mobile){ %>
+        <div class="carousel-item active border border-dark desktop" id='primBannerDesk'>
+          <img class="d-block w-100 lazyload" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+        </div>
+        <% contador++; %>
+    <% } else if(banner.mobile){ %>
+      <% if(contadorM === 0){ %>
+      <div class="carousel-item active border border-dark mobile" id='primBannerMob'>
+          <img class="d-block w-100 lazyload" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+      </div>
+      <% } else{ %>
+        <div class="carousel-item border border-dark mobile">
+            <img class="d-block w-100 lazyload" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+        </div>
+      <% } %>
+      <% contadorM++ %>
+    <% } else { %>
+      <div class="carousel-item border border-dark desktop">
+        <img class="d-block w-100 lazyload" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+      </div>
+    <% } %>
+    <% }); %>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Próximo</span>
+  </a>
+</div>
+<% } %>
+<div class="container">
+  <div class="bg-font-master p-0">
+<% if(ensino.length > 0){ %>
+  <div class="row justify-content-md-center row-diferencial mt-2 mb-0 p-0">
+  <% if(ensino.length < 4){ %>
+    <% ensino.forEach((ensino)=>{ %>
+      <div class="col-md-3 bg-ensino m-2 mx-lg-1">
+          <a href="/ensino/#<%=encodeURI(ensino.titulo)%>" class=''>
+          <div class='text-center font-roboto fonte-ensino back-ens-h6 p-0'><%= ensino.titulo %></div>
+          <p class='text-center font-roboto p-3'><%= ensino.subdescricao %></p>
+          <p class='text-center'>VEJA MAIS</p>
+        </a>
+        </div>
+    <% }); %>
+  <% } else { %>
+  <% ensino.forEach((ensino)=>{ %>
+    <div class="col-md-4 bg-ensino bg-md-diferencial m-2 mx-lg-1 p-0">
+        <a href="/ensino/#<%=encodeURI(ensino.titulo)%>" class=''>
+          <div class='text-center font-roboto fonte-ensino back-ens-h6 p-0'><%= ensino.titulo %></div>
+          <p class='text-center font-roboto p-3'><%= ensino.subdescricao %></p>
+          <p class='text-center veja-mais'>VEJA MAIS!</p>
+        </a>
+        </div>
+      <% }); %>
+  <% } %> 
+</div>
+  <% } %>
+</div>
+
+<% if(diferenciais.length > 0){ %>
+  <div class="bg-font-master mt-5">
+      <h1 class='text-center fonte-5 master mb-1'>Projetos</h1>
+      <div class="underline-text mb-4"></div>
+<div class="row justify-content-md-center">
+  <% if(diferenciais.length < 4){ %>
+<% diferenciais.forEach((diferencial)=>{ %>
+    <div class="col-md col-lg-3 mt-2 mx-1 py-2 bg-diferencial">
+      <div class="img-dif">
+        <img data-src="<%= diferencial.URL %>" class="img-fluid lazyload mt-2" style="width:100%" alt="<%= diferencial.descricao %>">
+      </div>
+        <h4 class='text-center font-roboto p-3'><%= diferencial.titulo %></h4>
+        <p class='font-roboto'><%= diferencial.descricao %></p>
+    </div>
+<% }); %>
+<% } else { %>
+  <div class="col-md-4 mt-2 mx-1 py-2 bg-diferencial bg-md-diferencial">
+      <img data-src="<%= diferencial.URL %>" class="img-fluid lazyload mt-2" style="width:100%" alt="<%= diferencial.descricao %>">
+      <h4 class='text-center font-roboto p-3'><%= diferencial.titulo %></h4>
+      <p class='font-roboto'><%= diferencial.descricao %></p>
+  </div>
+  <% } %>
+</div>
+</div>
+</div>
+<% } %>
+<div class="bg-font-fix mt-5">
+    <h1 class='fonte-5 master bg-font-master m-auto pb-1'>Estudantes</h1>
+    <div class="underline-text"></div>
+  </div>
+<div class="row row-estudantes bg-estudantes-home m-0 py-5">
+  <div class="container container-estudantes d-flex p-0">
+    <div class="row mx-auto w-100">
+
+  <div class="col-md-4 text-center">
+    <div class="col-12 p-0 mb-5">
+    <p class='mb-auto'>Tendo em vista a necessidade de conhecimentos tecnológicos por parte de toda sociedade,
+       estamos corroborando efetivamente para que nossos alunos se adequem à essa realidade.</p>
+    </div>
+    <div class="col-12 p-0 m-0">
+    <ul class='list-estudantes'>
+    <li>
+      <a href='/dever' class='btn btn-licao-de-casa cmbtn m-2'>Lição de casa</a>
+    </li>
+    <% if(regramento){ %>
+      <li>
+        <a href='<%= regramento.url %>' class='btn btn-regramento m-2'><i class="fas fa-book pr-2"></i>Regramento</a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+  </div>
+  <div class="col-md-4 mb-5 mb-md-0 justify-content-center text-center">
+    <h5 class='text-center fonte-6 master mb-3'>
+      Plataformas digitais <span class='pl-2'><i class="material-icons">computer</i></span>
+    </h5>
+    <% plataformas.forEach((plataforma)=>{ %>
+      <div class="col-12">
+        <a href='<%= plataforma.url %>' class='btn btn-plataforma'><%= plataforma.nome %></a>
+      </div>
+    <% }); %>
+  </div>
+  
+  <% if(eventos.length > 0){ %>
+    <div class="col-md-4 mb-0 text-center">
+      <h1 class='text-center master fonte-2'><i>Eventos</i></h1>
+    <div id="carouselExampleFadeEventos" class="carousel slide carousel-fade mb-2" data-ride="carousel" data-interval="false">
+        <div class="carousel-inner">
+    <% var y = 0; %>
+    <% eventos.forEach((evento)=>{ %>
+      <% if(y===0){ %>
+        <div class="carousel-item active rounded-bottom">
+              <% y++; %>
+        <% } else{ %>
+        <div class="carousel-item rounded-bottom">
+          <% } %>
+          <img data-src="<%=evento.capa%>" class='img-fluid lazyload' alt="<%=evento.descricao%>">
+            </div>
+    <% }); %>
+    <a class="carousel-control-prev" href="#carouselExampleFadeEventos" role="button" data-slide="prev">
+        <i class="fas fa-chevron-left fa-2x pr-3 mr-2" aria-hidden="true"></i>
+        <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFadeEventos" role="button" data-slide="next">
+        <i class="fas fa-chevron-right fa-2x pl-3 ml-2" aria-hidden="true"></i>
+        <span class="sr-only">Próximo</span>
+        </a>
+    </div>
+    </div>
+  </div>
+    <% } else{ %>
+      <div class="col-md-4 mb-5 mb-md-0 border text-center">
+          <h1 class='text-center'>Eventos</h1>
+      <p class='text-center py-5'>
+        Ainda não tivemos nenhum evento esse mês. Fique atento ao <a href='/eventos' class='cmbtn'>calendário</a>!
+      </p>
+    </div>
+      <% } %>
+    </div>
+    </div>
+</div>
+
+<% if(equipes.length > 0){ %>
+  <div class="row row-gestores bg-gestores-home mx-0 p-0 pt-5">
+    <div class="container container-gestores">
+    <div class="bg-flex-fix"></div>
+    <div class="bg-font-fix">
+      <h1 class='text-center fonte-5 master m-auto pb-1'>Nossos Gestores</h1>
+      <div class="underline-text mb-4"></div>
+    </div>
+  <div id="carouselExampleFadeHome" class="carousel slide carousel-fade mb-2 mx-auto" data-ride="carousel" data-interval="false">
+      <div class="carousel-inner">
+  <% var active = true; %>
+  <% equipes.forEach((equipe)=>{ %>
+      <% if(equipe.gestores !== undefined){ %>
+          <% var gestorCounter = 0; %>
+          <% var gestorCounteri = 0; %>
+          <% equipe.gestores.forEach((gestor)=>{ %>
+          <% if(gestorCounter === 0 && active){ %>
+          <div class="carousel-item active rounded-bottom">
+              <div class="row justify-content-center">
+          <% } %>
+          <% if(gestorCounter === 0 && !(active)){ %>
+              <div class="carousel-item rounded-bottom">
+              <div class="row justify-content-center">
+          <% } %>
+          <% if(gestorCounter <= 4){ %>
+              <div class="text-center d-inline-block col-3 p-0 m-0"> 
+              <img data-src="<%=gestor.url%>" class="img-fluid lazyload border border-light img-gestor rounded-circle">
+              </div>
+              <% gestorCounter++; %>
+              <% gestorCounteri++; %>
+          <% } %>
+          <% if(gestorCounter === 4 || gestorCounteri === equipe.gestores.length){ %>
+          </div>
+          </div> 
+          <% gestorCounter = 0; %>
+          <% active = false; %>
+          <% } %>
+         <% }); %>
+          <% } %>
+  <% }); %>
+  <a class="carousel-control-prev" href="#carouselExampleFadeHome" role="button" data-slide="prev">
+      <i class="fas fa-chevron-left fa-2x pr-5 mr-2" aria-hidden="true"></i>
+      <span class="sr-only">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleFadeHome" role="button" data-slide="next">
+      <i class="fas fa-chevron-right fa-2x pl-5 ml-2" aria-hidden="true"></i>
+      <span class="sr-only">Próximo</span>
+      </a>
+  </div>
+  <div class="row justify-content-center mb-5"><button href='/ensino/gestores' class='btn btn-master cmbtn' href='#'>Conheça nossa equipe!</button></div>
+</div>
+</div>
+</div>
+  <% } %>
+
+  <% if(bannersSecundarios.length > 0){ %>
+<div class="container">
+<div class='row row-secundario bg-font-master'>
+<div id="carouselExampleFade1" class="carousel slide carousel-fade col-md mt-3 align-items-center" data-ride="carousel">
+  <div class="carousel-inner">
+    <% bannersSecundarios.forEach((banner)=>{ %>
+    <% contador1++ %>
+    <% if(contador1 === 1){ %>
+    <div class="carousel-item active border border-dark">
+        <img class="d-block lazyload w-100" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+    </div>
+    <% } else { %>
+    <div class="carousel-item border border-dark">
+      <img class="d-block lazyload w-100" data-src="<%=banner.url%>" alt="<%=banner.nome%>">
+    </div>
+    <% } %>
+    <% }) %>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleFade1" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleFade1" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Próximo</span>
+  </a>
+</div>
+<% } %>
+<% if(documentos.length>0){ %>
+<div class='jumbotron doc-bg-cm col-md mt-3'>
+    <div class="panel panel-default">
+        <div class="panel-heading font-jumbotron-header m-auto pb-5 text-center"><i class="fas fa-file-alt d-lg-inline d-md-none d-sm-none"></i> Documentos</div>
+      <ul class="list-group">
+    <% documentos.forEach((documento)=>{ %>
+      <% if(documento.regramento){ %>
+      <% } else{ %>
+        <a href='<%=documento.url%>'><li class="list-group-item"><%=documento.nome%></li></a>
+        <% } %>
+    <% }) %>
+      </ul>
+    </div>
+  </div>
+</div>
+<% } %>
+
+    <div class="col-md-8 col-lg-6 mx-auto">
+		<div class="form-bot mx-auto my-5">
+			<h4 class="font-form-bot">Marque sua visita!</h4>
+				<div class="font-form pt-5">
+					<div><a class='location' href='https://www.google.com/maps/place/Escola+Master/@-15.9077756,-47.7641344,17z/data=!3m1!4b1!4m5!3m4!1s0x935a1f8702cbf41d:0xb378434566a4cc2!8m2!3d-15.9077808!4d-47.7619457'><%=contato.location%></a></div>
+					<div class="pt-2"><%=contato.email%></div>
+					<div class="pt-2"><%=contato.telefone1%></div>
+					<div><%=contato.telefone2%></div>
+					<div><%=contato.telefone3%></div>
+					<div class="pt-4">HORÁRIO DE FUNCIONAMENTO</div>
+					<div>Seg - Sex: 7:00 - 12:00 / 13:00 - 18:00</div>
+				</div>
+				<form class='form-group' data="/contato/mensagem" id='new'>
+					  <div class="form-row pt-4">
+					    <div class="col-md-6 mb-3">
+					      <input type='text' name="message[nome]" class="form-control form-control-sm" id="validationTooltip01" placeholder="Nome e sobrenome" autocomplete="off" required>
+					    </div>
+						 <div class="col-md-6 mb-3">
+					      <input type='email' name="message[email]" class="form-control form-control-sm" placeholder="Email" autocomplete="off" required>
+					    </div>
+					    <div class="col-md-6 mb-3">
+					      <input type='text' minlength="9" maxlength="22" name="message[telefone]" class="form-control form-control-sm" placeholder="Telefone para contato" autocomplete="off"  required>
+					    </div>
+					    <div class="col-md-6 mb-3">
+						  <textarea class="form-control noresize" rows="5" placeholder="Sua mensagem!" name='message[texto]' maxlength="250" autocomplete="off" required></textarea>
+						</div>
+					  </div>
+				  		<button class="btn btn-em" type="submit">Enviar mensagem</button>
+			</form>
+			<div class="font-form">
+			<a class="sm-ico" href="<%=contato.yt%>"><i class="fab fa-youtube fa-2x yt"></i></a>
+			<a class="sm-ico" href="<%=contato.ig%>"><i class="fab fa-instagram fa-2x ig"></i></a>
+			<a class="sm-ico" href="<%=contato.fb%>"><i class="fab fa-facebook-square fa-2x fb"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% include ./partials/footer.ejs %>

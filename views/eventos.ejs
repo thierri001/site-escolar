@@ -1,0 +1,34 @@
+<% include ./partials/header.ejs %>
+<div class="main">
+    <div class="container height100vh">
+    <% var anoNovo = ano; %>
+    <% var anoVelho = ano; %>
+    <% if(mes === 'dezembro'){ %>
+    <% anoNovo++ %>
+    <% } %>
+    <% if(mes === 'janeiro'){ %>
+    <%  anoVelho-- %>
+    <% } %>
+<div class="bg-font-master bg-eventos-master">
+    <div class='row justify-content-center justify-content-md-between mt-5'>
+    <a rel="prev" href='/eventos/<%=mesAnterior%>/<%=anoVelho%>' class='cmbtn' id='button-uppercase-evento'><h4 class='uppercase-evento font-roboto d-none d-lg-inline'><i class="fas fa-arrow-left mr-2"></i><span><%=mesAnterior%></span></h4></a>
+    <h5 class='uppercase-evento font-roboto text-center'><div class='back-date mr-3'><input type="month" name="dateEvent" id="dateEvent"></div><span><%= mes %>/<%= ano %></span></h5>
+    <a rel="next" href='/eventos/<%=mesPosterior%>/<%=anoNovo%>' id='button-uppercase-evento' class='cmbtn'><h4 class='uppercase-evento font-roboto d-none d-lg-inline'><span><%=mesPosterior%></span><i class="fas fa-arrow-right ml-2"></i></h4></a>
+    </div>
+    <br>
+<%if(todosEventos.length >0){%>
+    <div class='row bg-eventos rounded'>
+    <% todosEventos.forEach((evento)=>{ %>
+        <div class='col-md-3 bg-eventos-col text-center m-3'>
+            <h3 class='text-center m-1'><%= evento.titulo %></h3>
+            <a href='/eventos/<%=evento.id%>' class='cmbtn-evento'><img class='img-fluid img-fluid-eventos m-1' src='<%=evento.capa%>'></a>
+            <h5 class='text-center m-1'><%=evento.data_criacao.getDate()%>/<%=evento.data_criacao.getMonth()+1%>/<%=evento.data_criacao.getFullYear()%></h5>
+        </div>
+    <% }) %>
+    </div>
+<% }else{ %>
+    <h2 class='text-center pt-5 bg-font-master'> Parece que não tivemos evento no mês selecionado! =(</h2>
+<% } %>
+</div>
+</div>
+<% include ./partials/footer.ejs %>

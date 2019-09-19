@@ -1,0 +1,107 @@
+<% include ./partials/header.ejs %>
+<div class="main" style="height: auto">
+<div class="row row-elem p-1 pt-4 px-4 m-0">
+  <% if(posts.length >0){ %>
+    <% if(locals.assuntoPesq){ %>
+      <div class="col-10 m-auto m-md-0">
+        <h1 class='text-center text-dark my-1'><span class='pr-2'>Procurando por: </span><%=assuntoPesq%></h1>
+      </div>
+    <% }else if(assunto){ %>
+      <div class="col-10 m-auto m-md-0">
+        <h1 class='text-center text-dark my-1'><span class='pr-2'><%-assunto.icone%></span><%=assunto.assunto %></h1>
+      </div>
+    <% } %>
+    <div class="col-md-10 font-roboto row-assuntos mb-5 mb-md-0 p-0 my-0">
+              <div class="font-roboto col-md-12 bg-categoria-row p-0 border border-secondary">
+          <div class="row-pesquisa">
+
+          <% posts.forEach((post)=>{ %>
+              <div class="col-12 border-bottom py-2 container-post">
+                <div class="d-flex">
+                  <h4 class="mb-0 float-left">
+                  <a class="text-master cmbtn2" href='/blog/<%= post._id %>'><%= post.titulo %></a>
+                  </h4>
+                  <div class="ml-auto p-2 p-lg-0 d-block d-lg-flex">
+                    <span id='likesSpan' class='text-dark mr-0 mr-md-5'><%= post.likes %><i class="fas fa-thumbs-up ml-2"></i></span>
+                    <div class="text-dark mb-1"><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth()+1 %>/<%= post.data_criacao.getFullYear() %></div>
+                  </div>
+                </div>
+              <p class='text-dark'><%= post.descricao %></p>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+          <% if(!(numeroPesquisa)){ %>
+          <% }else{ %>
+        <div class="row w-100 justify-content-center text-center m-0">
+        <% if(numeroPesquisa  > 6 && postMaiorQue10){ %>
+        <button href='/blog/pagina/<%= numeroPesquisa  -3 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa -3 %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa  -2 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa  -1 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa     %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa  +1 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa +1 %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa  +2 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa +2 %></button>
+        <button href='/blog/pagina/<%= numeroPesquisa  +3 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa  +3 %></button>
+        <% } else if (numeroPesquisa > 6 && !(postMaiorQue10)){ %>
+            <button href='/blog/pagina/<%= numeroPesquisa  -6 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa -6 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa  -5 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa -5 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa  -4 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa -4 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa  -3 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa -3 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa  -2 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa  -1 %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+            <button href='/blog/pagina/<%= numeroPesquisa     %>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+        <% } else if (numeroPesquisa <= 7 && numeroPesquisa > 0 && numeroDocs > 1) { %>
+          <% for(i = 0; i < 7; i++){ %>
+            <% if (numeroPesquisa-1 === i){ %>
+              <button href='/blog/pagina/<%=i+1%>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa botao-pesquisa-selecionado'><%=i+1%></button>
+              <% } else { %>
+              <button href='/blog/pagina/<%=i+1%>/<%=assunto.assunto%>' class='btn cmbtn3 botao-pesquisa'><%=i+1%></button>
+              <% } %>
+            <% } %>
+          <% } %>
+        </div>
+      <% } %>
+      <div class="col-md-10 font-roboto row-assuntos p-0 my-0"></div>
+</div>
+<div class="col-md-2 row-content p-0">
+<div class="col-12 col-pesq-categoria border m-0">
+  <% categorias.forEach((categoria)=>{ %>
+    <div class="w-100 fonte-5 text-left p-3 p-md-2"><h5><span class='pr-2'><%-categoria.icone%></span><%= categoria.categoria %></h5><div class="underline-text"></div></div>
+    <div class="w-100 p-0">
+        <% categoria.assuntos.forEach((assunto)=>{ %>
+            <a href="/blog/assunto/<%=assunto.assunto%>/posts" class='btn-assunto p-1 cmbtn'><span class='pr-2'><%-assunto.icone%></span><%= assunto.assunto %></a>
+        <% }); %>
+    </div>
+  <% }); %>
+</div>
+  <!-- <div class="img-col-bg">
+      <a href="/home" class='img-fluid'>
+          <img src="https://firebasestorage.googleapis.com/v0/b/colegio-master-243821.appspot.com/o/evento%201.jpg_1565279629494?alt=media" alt="" class='img-fluid'>
+      </a>
+  </div> -->
+</div>
+        <% } else { %>
+          <div class="col-md-10 font-roboto row-assuntos p-0 my-0">
+            <h1 class='text-center text-dark my-5'>Não achamos nenhum post que corresponde a pesquisa. =(</h1>
+    </div>
+    <div class="col-md-2 row-content p-0">
+      <div class="col-12 col-pesq-categoria border m-0">
+        <% categorias.forEach((categoria)=>{ %>
+          <div class="w-100 fonte-5 text-left p-3 p-md-2"><h5><span class='pr-2'><%-categoria.icone%></span><%= categoria.categoria %></h5><div class="underline-text"></div></div>
+          <div class="w-100 p-0">
+              <% categoria.assuntos.forEach((assunto)=>{ %>
+                  <a href="/blog/assunto/<%=assunto.assunto%>/posts" class='btn-assunto p-1 cmbtn'><span class='pr-2'><%-assunto.icone%></span><%= assunto.assunto %></a>
+              <% }); %>
+          </div>
+        <% }); %>
+      </div>
+        <!-- <div class="img-col-bg">
+            <a href="/home" class='img-fluid'>
+                <img src="https://firebasestorage.googleapis.com/v0/b/colegio-master-243821.appspot.com/o/evento%201.jpg_1565279629494?alt=media" alt="" class='img-fluid'>
+            </a>
+        </div> -->
+      </div>
+      <% } %>
+</div>
+</div>
+<% include ./partials/footer.ejs %>

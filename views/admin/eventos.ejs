@@ -1,0 +1,32 @@
+<% include ./partials/header %>
+<div class='main'>
+    <div class="row justify-content-center">
+    <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    <a href="/admin/evento/new" class='btn cmbtn btn-gerenciamento m-1'><i class="fas fa-plus pr-2"></i>Novo evento</a>
+    </div>
+    <% if(todosEventos.length >0){ %>
+<div class='row justify-content-center'>
+        <ul class='w-100 p-0'>
+        <% todosEventos.forEach((evento)=>{ %>
+        <li class="container-elemento m-1">
+            <div class="row p-2 align-items-center justify-content-between m-2">
+                <div class='col-md-5'>
+                <a href="/admin/edit/eventos/<%=evento._id%>" class='cmbtn'><h5><%= evento.titulo %></h5></a>
+                </div>
+                <div class='col-md-3 p-1'>
+                <h6 class=''><%= evento.data_criacao.getDate() %>/<%= evento.data_criacao.getMonth() %>/<%= evento.data_criacao.getFullYear() %></h6>
+                </div>
+                <div class="col-md-4">
+                <form class='float-right'>
+                    <button class='btn btn-delete deletar p-0' data="/admin/evento/<%=evento._id%>"><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+                </div>
+            </div>
+        </li>
+        <% }) %>
+        </ul>
+    <% } else { %>
+    <h1 class='text-center m-5'>Parece que não há nenhum evento ainda!</h1>
+    <% } %>
+</div>
+<% include ./partials/footer %>

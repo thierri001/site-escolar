@@ -1,0 +1,42 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'>Criação de documentos</h1>
+    <div class="row justify-content-left pl-3">
+        <a href="/admin/home" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="form-document row justify-content-center border border-secondary">
+        <h2 class='text-center'>Novo documento</h2>
+        <div class="form-group m-2 text-center col-12">
+            <form data="/admin/home/documentos/" id='sendNameModel' class='col-md-3 m-auto'>
+            <label class="">Nome do documento</label>
+            <input type="text" placeholder='Nome do documento' name='nome' class='col-12' required>
+            </form>
+        </div>
+        <div class="form-group m-2 text-center col-12">
+        <form data='' dataurl="/admin/home/documentos" id='sendArchive' class='col-md-5 m-auto'>
+            <input class="form-control-file m-2" type="file" name="document" id='input-file' required/>
+        </form>
+        </div>
+        <button form='sendNameModel' class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </div>
+    <div class="container-documentos">
+    <% documentos.forEach((documento)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center justify-content-between m-2">
+                <a href="<%=documento.url%>" class='col-md-4 col-6'><h5><%= documento.nome %></h5></a>
+                <% if(documento.regramento){ %>
+                <% }else{ %>
+                <form class='col-md' data="/admin/home/documentos/regramento/<%=documento._id%>" id='update'>
+                    <button class='btn btn-primary'>Definir como Regramento</button>
+                </form>
+                <% } %>
+                <p class='col-md scroll-x mb-0'><%=documento.url%></p>
+                <form class='col-md text-right'>
+                    <button class='btn btn-delete deletar p-0' data='/admin/home/documentos/<%=documento.id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+</div>
+<% include ../../partials/footer %>

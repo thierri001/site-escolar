@@ -1,0 +1,12 @@
+<main>
+    <!--Mostra o evento selecionado-->
+    <img src="<%=evento.capa%>">
+    <h2><%=evento.titulo%></h2>
+    <p><%= evento.descricao %></p>
+    <!--Se tiver foto-->
+    <% evento.fotos.forEach(function(foto){ %>
+    <img src="<%= foto.URL %>" titulo="<%=foto.titulo%>" descricao="<%=foto.descricao%>">
+    <% }) %>
+    <!--titulo e descricao em atributos manipulaveis para mostra em slide -->
+    <!--Procurar mes e ano envia ajax-->
+</main>

@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+<div class="main">
+	<div class="row w-100 justify-content-center">
+			<form data="/blog/usuario/resetaSenha/<%= token %>" id='new' class='form-bg text-dark p-5 text-center col-10 col-md-6'>
+			  <legend>Renovar Senha</legend>
+			  <div class="form-group">
+			    <label for="password">Nova Senha</label>
+			    <input type="password" name="password" value="" placeholder="New password" autofocus="autofocus" class="form-control"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="confirm">Confirme a Nova Senha</label>
+			    <input type="password" name="confirm" value="" placeholder="Confirm password" class="form-control"/>
+			  </div>
+			  <div class="form-group">
+					<button class='btn btn-secondary'>Enviar</button>
+			  </div>
+			</form>
+	</div>
+</div>
+<% include ./partials/footer %>

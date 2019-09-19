@@ -1,0 +1,41 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'><%=equipe.titulo%></h1>
+    <a href='/admin/ensino/equipes' class='cmbtn btn btn-gerenciamento m-3'>Voltar</a>
+    <div class="form-gestores row justify-content-center border border-secondary">
+        <div class="form-group m-2 text-center col-12">
+            <h3>Novo gestor</h3>
+            <form data="/admin/ensino/equipes/<%=equipe._id%>/gestores" id='sendNameModel' class='m-1 col-md-12 justify-items-between'>
+                <input type="text" placeholder='Nome do gestor' name='nome'>
+            </form>
+        </div>
+        <div class="form-group m-auto text-center col-12">
+            <label>Foto gestor</label>
+            <form data='' dataurl="/admin/ensino/equipes/imagem" id='sendArchive' class='col-5 m-auto'>
+                <input class="form-control-file" type="file" name="image" id='input-file'/>
+            </form>
+        </div>
+        <button form='sendNameModel' class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </div>
+    <div class="container-gestores">
+    <% gestores.forEach((gestor)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 m-2">
+            <img src="<%= gestor.url %>" alt="<%=gestor.nome%>" class='col-md-6 col-12 img-fluid'>
+            <form data="/admin/ensino/equipes/gestor/<%=gestor.id%>" id='update' class='col-md-6 col-12'>
+                <input class="form-control m-1" type="text" placeholder='Nome do gestor' name='nome' value='<%=gestor.nome%>'>
+                <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+            </form>
+            <form data="/admin/ensino/equipes/imagem/<%=gestor.id%>" id='sendImg' class='col-md-6 col-12 text-center'>
+                <input class="form-control-file m-2" type="file" name="image" id='input-file'/>
+                <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+            </form>
+            <form class='col-12 text-right'>
+                <button class='btn btn-delete deletar p-0' data='/admin/ensino/equipes/gestor/<%=gestor.id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+            </form>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+</div>
+<% include ../../partials/footer %>

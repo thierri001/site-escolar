@@ -1,0 +1,111 @@
+<% include ../partials/header %>
+<div class="main">
+    <% if(tituloAssunto){ %>
+        <h1 class='text-center'><%= tituloAssunto %></h1>
+    <% } %>
+    <% if(assuntos.length > 0) { %>
+        <div class="selectURL">
+        <h5>Pesquisa por assunto</h5>
+                <select id='searchUrl'>
+                    <option value="#"></option>
+              <% assuntos.forEach((assunto)=>{ %>
+                  <option value="/admin/blog/posts/search/1/<%=assunto.assunto%>"><%= assunto.assunto %></option>
+              <% }) %>
+                </select>
+                <button href='#' id='searchPosts' class='cmbtn'>Procurar</button>
+        </div>
+    <% } %>
+    <form class="form-inline my-2 my-lg-0 d-block text-center" data='/admin/blog/posts/search' id='search'>
+        <input name='procura' class="form-control mr-sm-2" type="search" placeholder="Procurar post" aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search pr-1"></i></button>
+    </form>
+    <div class="container-posts">
+    <% if(posts.length > 0){ %>
+    <% posts.forEach((post)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center justify-content-between m-2">
+                <div class='col-md col-12'><h5><%= post.titulo %></h5></div>
+                <div class='col-md col-12'><h5><%= post.assunto %></h5></div>
+                <div class='col-md col-12'><h5><%= post.autor.username %></h5></div>
+                <div class='col-md col-12'><h6><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth()+1%>/<%= post.data_criacao.getFullYear() %></h6></div>
+                <form class='col-md float-right text-right'>
+                    <button class='btn btn-delete deletar p-0' data='/admin/blog/post/delete/<%= post._id %>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+    <% } else { %>
+        <h1 class='text-center m-5'>Não encontramos mais posts! =(</h1>
+    <% } %>
+    </div>
+    <% if(tituloAssunto){ %>
+        <% if(!(numeroPesquisa)){ %>
+            <% }else{ %>
+          <div class="row justify-content-center text-center">
+          <% if(numeroPesquisa  > 6 && postMaiorQue10){ %>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -3 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -3 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -2 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -1 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa     %>/<%=assunto%>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +1 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa +1 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +2 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa +2 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +3 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa  +3 %></button>
+          <% } else if (numeroPesquisa > 6 && !(postMaiorQue10)){ %>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -6 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -6 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -5 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -5 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -4 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -4 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -3 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -3 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -2 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -1 %>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa     %>/<%=assunto%>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+          <% } else if (numeroPesquisa <= 7 && numeroPesquisa > 0 && numeroDocs > 1) { %>
+            <% for(i = 0; i < 7; i++){ %>
+              <% if (numeroPesquisa-1 === i){ %>
+                <button href='/admin/blog/posts/search/<%=i+1%>/<%=assunto%>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%=i+1%></button>
+                <% } else { %>
+                <button href='/admin/blog/posts/search/<%=i+1%>/<%=assunto%>' class='btn cmbtn botao-pesquisa'><%=i+1%></button>
+                <% } %>
+              <% } %>
+            <% } %>
+        <% } %>
+    </div>
+        <% } else { %>
+        <% if(!(numeroPesquisa)){ %>
+            <div class="row justify-content-center">
+                    <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+            </div>
+            <% }else{ %>
+          <div class="row justify-content-center text-center">
+          <% if(numeroPesquisa  > 6 && postMaiorQue10){ %>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -3 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -3 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -2 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  -1 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa     %>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +1 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa +1 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +2 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa +2 %></button>
+          <button href='/admin/blog/posts/search/<%= numeroPesquisa  +3 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa  +3 %></button>
+          <% } else if (numeroPesquisa > 6 && !(postMaiorQue10)){ %>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -6 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -6 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -5 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -5 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -4 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -4 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -3 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa -3 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -2 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 2 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa  -1 %>' class='btn cmbtn botao-pesquisa'><%= numeroPesquisa - 1 %></button>
+              <button href='/admin/blog/posts/search/<%= numeroPesquisa     %>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%= numeroPesquisa %></button>
+          <% } else if (numeroPesquisa <= 7 && numeroPesquisa > 0 && numeroDocs > 1) { %>
+            <% for(i = 0; i < 7; i++){ %>
+              <% if (numeroPesquisa-1 === i){ %>
+                <button href='/admin/blog/posts/search/<%=i+1%>' class='btn cmbtn botao-pesquisa botao-pesquisa-selecionado'><%=i+1%></button>
+                <% } else { %>
+                <button href='/admin/blog/posts/search/<%=i+1%>' class='btn cmbtn botao-pesquisa'><%=i+1%></button>
+                <% } %>
+              <% } %>
+            <% } %>
+        <% } %>
+    </div>
+    <% } %>
+    <div class="row justify-content-center">
+        <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ../partials/footer %>

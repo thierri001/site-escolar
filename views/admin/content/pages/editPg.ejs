@@ -1,0 +1,21 @@
+<% include ./partials/header %>
+<div class="main">
+    <h1 class='text-center'><%= pagina.name %></h1>
+    <form data="/admin/edit/paginas/<%= pagina._id %>" id="updatePagina" class='text-center'>
+      <div class="form-group">
+        <input type="text" name="page[name]" placeholder="Nome da página" required="true" value="<%= pagina.name %>" class='m-2'/>
+      </div>
+      <div class="form-group text-left">
+        <textarea id="summernote" name="page[html]"><%= pagina.html %></textarea>
+      </div>
+      <button class='m-2 btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </form>
+    <div class="row justify-content-center">
+    <a href="/admin/edit/paginas" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <script>
+    var markupStr = $33("textarea").attr('content');
+    $33('#summernote').summernote('code', markupStr);
+    </script>
+</div>
+<% include ./partials/footer %>

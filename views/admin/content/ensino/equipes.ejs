@@ -1,0 +1,39 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'>Equipes de gestores</h1>
+    <a href='/admin/edit/ensino' class='cmbtn btn btn-gerenciamento m-3'>Voltar</a>
+    <div class="form-equipes">
+        <form data="/admin/ensino/equipes" id='new' class='text-center'>
+            <label>Nova equipe</label>
+            <input type="text" placeholder='Título da equipe' name='titulo'>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+        </form>
+    </div>
+    <div class="container-equipes">
+    <% equipes.forEach((equipe)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center m-2">
+                <form data="/admin/ensino/equipes/<%=equipe.id%>" id='update' class='col-md-4 col-12 text-center'>
+                    <input type="text" placeholder='Título da equipe' name='titulo' value='<%=equipe.titulo%>'>
+                    <h5 class='m-2'>Ordem de exibição : <%=equipe.ordem%></h5>
+                    <select name="ordem">
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                    </select>
+                    <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                </form>
+                <div class="col-md-6 col-12 text-center">
+                    <button href='/admin/ensino/equipes/<%=equipe.id%>/gestores' class='btn btn-primary cmbtn'>Editar gestores</button>
+                </div>
+                <div class="col-md-2 col-12">
+                    <form>
+                        <button class='btn btn-delete deletar p-0 float-right' data='/admin/ensino/equipes/<%=equipe.id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+</div>
+<% include ../../partials/footer %>

@@ -1,0 +1,19 @@
+    
+<% include ./partials/header %>
+<div class="main">
+	<div class="row w-100 justify-content-center mt-5">
+			<form data="/blog/usuario/recuperarSenha" id='new' class='form-bg text-dark p-5 text-center col-10 col-md-6'>
+				<h5 class='text-center mb-3'>Recuperar minha senha</h5>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" name="email" autofocus class="form-control">
+				</div>
+				<div class="form-group">
+					<button class='btn btn-info'>Enviar</button>
+				</div>
+				<br>
+				<p>Já já vai chegar um email com mais instruções para renovar sua senha! Caso não receba na caixa de email principal, verifique sua caixa de spam ou lixo.</p>
+			</form>
+	</div>
+</div>
+<% include ./partials/footer %>

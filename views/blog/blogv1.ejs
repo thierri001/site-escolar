@@ -1,0 +1,83 @@
+<% include ./partials/header.ejs %>
+<div class="main" style="height: auto;">
+    <% if(message){ %>
+    <div class="row justify-content-md-center text-center fixed-top m-0">
+        <div class="alert alert-danger col-md-12 text-center" role="alert"><%=message%></div>
+    </div>
+      <% } %>
+      <% if(assuntos.length > 0){ %>
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-lg-center">
+              <% assuntos.forEach((assunto)=>{ %>
+                <a class="p-2 text-muted cmbtn btn-post-blog" href="/blog/assunto/<%=assunto.assunto%>/posts"><strong><%=assunto.assunto%></strong></a>
+              <% }); %>
+            </nav>
+          </div>
+        <% } %>
+        <form class="form-inline my-2 my-lg-0 d-block d-lg-none text-center" data='/blog/search' id='procura'>
+            <input name='procura' class="form-control mr-sm-2" type="search" placeholder="Procurar post" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search pr-1"></i></button>
+        </form>
+    <% if(posts.length >0){ %>
+        <% var i = 0; %>
+    <% posts.forEach((post)=>{ %>
+      <% if (i === 0){ %>
+    <div class="row p-1">
+      <div class="position-relative overflow-hidden p-1 mb-2 text-center col-12 justify-content-center post-config">
+          <div class="col-md-6 p-lg-8 mx-auto my-1">
+            <strong class="d-inline-block mb-2 text-warning"><%= post.assunto %></strong>
+            <a class="btn-post-blog cmbtn2 text-dark" href='/blog/<%= post._id %>'>
+            <h1 class="display-4 pb-1 font-weight-normal titulo-highlight"><%= post.titulo %></h1>
+              <p class="lead font-weight-normal"><%= post.descricao %></p>
+              <p class='col-12'><b><%= post.autor.username %></b></p>
+              <p class='col-12'><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth()+1 %>/<%= post.data_criacao.getFullYear() %></p>
+              <p class='col-12 col-likes'><span id='likesSpan' class='text-success'><%= post.likes %></span> | <span id='dislikesSpan' class='text-danger'><%= post.dislikes %></span></p>
+            </a>
+              <% if(currentUser) { %>
+              <div class="col-12">
+                <a class='col-6 text-success' href='/blog/<%=post._id%>/like' id='likes'><i class="fas fa-thumbs-up"></i></a>
+                <a class='col-6 text-danger' href='/blog/<%=post._id%>/dislike' id='likes'><i class="fas fa-thumbs-down"></i></a>
+              </div>
+                <% } %>
+          </div>
+      </div>
+    </div>
+      <% i++; %>
+    <% }else{ %>
+    <% if(i===1){ %>
+      <div class="row mb-2">
+        <% if(i===0){ %>
+          <% i = i+2; %>
+        <% } %>
+    <% } %>
+    <div class="col-md-6 p-1">
+      <div class="card flex-md-row mb-2 shadow-sm h-md-250 back-post">
+        <div class="card-body d-flex flex-column align-items-center">
+          <strong class="d-inline-block mb-2 text-light"><%= post.assunto %></strong>
+          <h3 class="mb-0">
+            <a class="text-light cmbtn2" href='/blog/<%= post._id %>'><%= post.titulo %></a>
+          </h3>
+          <div class="mb-1 text-light"><h6><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth()+1 %>/<%= post.data_criacao.getFullYear() %></h6></div>
+          <p class="card-text mb-auto"><%= post.descricao %></p>
+          <p class='col-likes'><span id='likesSpan' class='text-success'><%= post.likes %></span> | <span id='dislikesSpan' class='text-danger'><%= post.dislikes %></span></p>
+          <% if(currentUser) { %>
+            <div class="row">
+                <div class="col-12">
+                    <a class='col-6 text-success' href='/blog/<%=post._id%>/like' id='likes'><i class="fas fa-thumbs-up"></i></a>
+                    <a class='col-6 text-danger' href='/blog/<%=post._id%>/dislike' id='likes'><i class="fas fa-thumbs-down"></i></a>
+                  </div>
+            </div>
+            <% } %>
+          <a class="cmbtn2 text-light" href='/blog/<%= post._id %>'>Continue lendo</a>
+        </div>        
+      </div>
+    </div>
+  <% i++; %>
+  <% } %>
+    <% if(i === posts.length){ %>
+    </div>
+    <% } %>
+    <% }); %>
+    <% } %>
+</div>
+<% include ./partials/footer.ejs %>

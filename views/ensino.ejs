@@ -1,0 +1,90 @@
+<% include ./partials/header.ejs %>
+<div class="main main-ensino main-auto">
+    <% var counterEnsino = 0; %>
+    <% if(ensinos.length>0){ %>
+    <% ensinos.forEach((ensino)=>{ %>
+     <% counterEnsino++ %>
+      <% if(counterEnsino%2==0){ %>
+        <div class="row bg-ensino-home" id='<%=encodeURI(ensino.titulo)%>' style='background-image: url(<%=ensino.URL%>)'>
+            <div class="container row-container-ensino-l my-auto">
+                <div class="row row-ensino-em">
+                    <div class="col-md">
+                        <div class="content-wrapper text-left back-2 py-3 px-5">
+                            <div class="bg-font-fix mb-1">
+                                <h1 class='fonte-5 master m-auto pb-1'><%=ensino.titulo%></h1>
+                                <div class="underline-text"></div>
+                            </div>
+                            <p class="text-dark"><%=ensino.descricao%><br></p>
+                        </div>
+                    </div>
+                    <div class="col-3 d-none d-md-block"></div>
+                </div>
+            </div>
+        </div>
+        <% }else{ %>
+        <div class="row bg-ensino-home" id='<%=encodeURI(ensino.titulo)%>'  style='background-image: url(<%=ensino.URL%>)'>
+            <div class="container row-container-ensino-r my-auto">
+                <div class="row row-ensino-em">
+                    <div class="col-md order-md-2">
+                        <div class="content-wrapper text-left back-2 py-3 px-5">
+                            <div class="bg-font-fix mb-1">
+                                <h1 class='fonte-5 master m-auto pb-1'><%=ensino.titulo%></h1>
+                                <div class="underline-text"></div>
+                            </div>
+                            <p class="text-dark"><%=ensino.descricao%><br></p>
+                        </div>
+                    </div>
+                    <div class="col-3 d-none d-md-block order-md-1"></div>
+                </div>
+        </div>
+        </div>
+        <% } %>
+    <% }) %>
+    <% } %>
+<div class="container">
+    <h1 class='text-center mb-5 fonte-2 master bg-font-master margin-ensino mt-3'>Colaboradores</h1>
+        <% if(equipe1.gestores != undefined){ %>
+        <% var gestorCounter = 0; %>
+        <div class="row justify-content-center mb-3 bg-light bg-gestores">
+        <h2 class='text-center col-12 m-2'><%=equipe1.titulo%></h2>
+        <% equipe1.gestores.forEach((gestor)=>{ %>
+        <% if(gestorCounter < 4){ %>
+            <div class="col-md-3 mt-4 text-center">
+                <img src="<%=gestor.url%>" class="rounded-circle ensino-img-gestor">
+                <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+            </div>
+        <% } gestorCounter++; %>
+        <% }); %>
+        </div>
+        <% } %>
+        <% if(equipe2.gestores != undefined){ %>
+        <% var gestorCounter = 0; %>
+        <div class="row justify-content-center mb-3 bg-light bg-gestores">
+        <h2 class='text-center col-12 m-2'><%=equipe2.titulo%></h2>
+        <% equipe2.gestores.forEach((gestor)=>{ %>
+        <% if(gestorCounter < 4){ %>
+            <div class="col-md-3 mt-4 text-center">
+                <img src="<%=gestor.url%>" class="rounded-circle ensino-img-gestor">
+                <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+            </div>
+        <% } gestorCounter++; %>
+        <% }); %>
+        </div>
+        <% } %>
+        <% if(equipe3.gestores != undefined){ %>
+        <% var gestorCounter = 0; %>
+        <div class="row justify-content-center mb-3 bg-light bg-gestores">
+        <h2 class='text-center col-12'><%=equipe3.titulo%></h2>
+        <% equipe3.gestores.forEach((gestor)=>{ %>
+        <% if(gestorCounter < 4){ %>
+            <div class="col-md-3 mt-4 text-center"> 
+            <img src="<%=gestor.url%>" class="rounded-circle ensino-img-gestor">
+                <strong><h5 class='text-center font-roboto p-3'><%= gestor.nome %></h5></strong>
+            </div>
+        <% } gestorCounter++; %>
+        <% }); %>
+        </div>
+        <% } %>
+        <div class="row justify-content-center mb-5"><button href='/ensino/gestores' class='btn btn-master cmbtn' href='#'>Conheça nossa equipe!</button></div>
+    </div>
+<% include ./partials/footer.ejs %>

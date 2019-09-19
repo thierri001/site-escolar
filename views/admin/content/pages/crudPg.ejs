@@ -1,0 +1,25 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'>Criação de páginas</h1>
+    <h5 class='text-center m-5'>Não se esqueça de fazer um link da página com um <a class='cmbtn' href='/admin/home/menus'>menu!</a></h5>
+    <div class="row justify-content-center">
+        <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+        <a href="/admin/new/pagina" class='btn btn-gerenciamento m-1'><i class="fas fa-plus pr-2"></i>Nova pagina</a><br>
+    </div>
+    <% if(paginas.length >0){ %>
+    <% paginas.forEach(function(pagina){ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center m-2">
+                <a href="/admin/edit/paginas/<%= pagina._id %>" class='col-md col-12'><h5><%= pagina.name %></h5></a>
+                <p class='col-md scroll-x mb-0'>/admin/edit/paginas/<%= pagina._id %></p>
+                <form class='text-right col-md col-12'>
+                    <button class='btn btn-delete deletar p-0' data="/admin/paginas/<%= pagina._id %>/delete"><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+            <% }) %>
+    <% } else { %>
+    <h1 class='text-center m-5'>Parece que não criamos nenhuma página ainda!</h1>
+    <% } %>
+</div>
+<% include ../../partials/footer %>

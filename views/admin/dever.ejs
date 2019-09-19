@@ -1,0 +1,53 @@
+<% include ./content/pages/partials/header %>
+<div class="main">
+    <div class="text-center">
+        <a href="/admin/gerenciamento" class='btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <% if(data){ %>
+    <div class="form-document row justify-content-center border border-secondary">
+        <h2 class='text-center'>Novo dever</h2>
+        <div class="form-group m-2 text-center col-12">
+            <form data="/admin/dever" id='new' class='col-lg-5 m-auto'>
+            <label class=""><%= data %></label>
+            <div class="form-group text-left">
+                <textarea name="texto" id='summernote'></textarea>
+            </div>
+            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+            </form>
+        </div>
+    </div>
+    <% } %>
+<% if(dever.length >0){ %>
+    <div class="container-dever">
+<% dever.forEach((dever)=>{ %>
+    <div class="container-elemento">
+        <div class="row p-2 align-items-center justify-content-between m-2">
+            <h5 class='col-md col-12'><%= dever.date.getDate() %>/<%= dever.date.getMonth()%>/<%= dever.date.getFullYear() %> %></h5>
+            <h5 class='col-md col-12'>
+                <a href='#' data-toggle="modal" data-target="#editarDever" class="btn btn-primary p-3 text-center" dataUrl='/admin/dever/<%=dever._id%>'>Editar</a>
+            </h5>
+            <form class='col-md col-12 text-right'>
+                <button class='btn btn-delete deletar p-0' data='/admin/dever/<%=dever._id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+            </form>
+        </div>
+    </div>
+<% }) %>
+</div>
+<% } %>
+    <div class="modal fade" id="editarDever" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+        <div class="modal-dialog mx-auto mt-5" role="document">
+            <div class="modal-content transp border-none" style="max-width: 600px;">
+                <div class="modal-body transp border-none">
+                    <form data="" id='formModalDever'>
+                        <textarea id='editDeverBox' name='texto'>
+                        </textarea>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary btn-prim-fix ml-2 mt-1" id='btnFormDever' data-dismiss="modal">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ./content/pages/partials/footer %>

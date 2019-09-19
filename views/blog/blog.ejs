@@ -1,0 +1,50 @@
+<% include ./partials/header.ejs %>
+<div class="main">
+    <div class="row row-elem p-1 pt-4 px-4 m-0">
+        <% if(message){ %>
+        <div class="row justify-content-md-center text-center fixed-top m-0">
+            <div class="alert alert-danger col-md-12 text-center" role="alert"><%=message%></div>
+        </div>
+        <% } %>
+        <form class="col-12 text-center d-lg-none" data='/blog/search' id='procura-mob'>
+            <input name='procura' class="form-control mr-sm-2" type="search" placeholder="Procurar post" aria-label="Search" required>
+            <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search pr-1"></i></button>
+        </form>
+        <div class="col-lg-10 row-assuntos font-roboto p-0">
+            <% categorias.forEach((categoria)=>{ %>
+                <div class="wrap-categoria-assunto my-2">
+                <div class="w-100 fonte-5 text-left pb-0 px-0 pt-3 pt-md-2"><h5><span class='pr-2'><%-categoria.icone%></span><%= categoria.categoria %></h5></div>
+                <div class="w-100 p-0">
+                    <% categoria.assuntos.forEach((assunto)=>{ %>
+                        <a href="/blog/assunto/<%=assunto.assunto%>/posts" class='btn-assunto p-1 cmbtn'><span class='pr-2'><%-assunto.icone%></span><%= assunto.assunto %></a>
+                    <% }); %>
+                </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="col-lg-2 row-content p-0">
+            <div class="bg-content">
+            <div class="text-center">
+                <h3 class='fonte-4 master'>Destaques</h3>
+                <% posts.forEach((post)=>{ %>
+                    <div class="p-0 m-1">
+                        <a class='btn-post-destaque font-roboto d-block cmbtn2 p-2 m-0' href='blog/<%=post._id%>' title='<%=post.titulo%>'><%=post.titulo%></a>
+                    </div>
+                <% }); %>
+            </div>
+            <!-- <div class="text-center font-roboto m-0">
+                <p class='mt-3 border-bottom'>Total de posts</p>
+                <p><%=totalPosts%></p>
+                <p class='mt-1 border-bottom'>Usuários cadastrados</p>
+                <p class='mb-0'><%=totalUsuarios%></p>
+            </div> -->
+            <!-- <div class="img-col-bg">
+                <a href="/home" class='img-fluid'>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/colegio-master-243821.appspot.com/o/evento%201.jpg_1565279629494?alt=media" alt="" class='img-fluid'>
+                </a>
+            </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer.ejs %>

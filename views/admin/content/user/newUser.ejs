@@ -1,0 +1,21 @@
+<% include ../../partials/header %>
+    <div class="main">
+    <form data="/admin/usuario/new" id='new' class='text-center'>
+        <div class="form-group text-center">
+            <input type="text" name="username" placeholder="Nome do usuário"/>
+        </div>
+        <div class="form-group text-center">
+            <input type="password" name="password" placeholder="Senha">
+        </div>
+        <% if(currentUser.isAdmin){ %>
+        <div class="form-group text-center">
+            <input type="text" name='admin' placeholder="Senha novo Admin">
+        </div>
+        <% } %>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </form>
+    <div class="row justify-content-center">
+            <a href="/admin/edit/usuarios" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    </div>
+<% include ../../partials/footer %>

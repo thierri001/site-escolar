@@ -1,0 +1,32 @@
+<% include ./partials/header %>
+<div class="main">
+  <div class="row justify-content-center">
+  <button href='/admin/ensino/equipes' class='cmbtn btn btn-gerenciamento m-1'>Equipe gestora</button>
+  <button href='/admin/ensino/new' class='cmbtn btn btn-gerenciamento m-1'><i class="fas fa-plus pr-2"></i>Criar ensino</button>
+    <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+  </div>
+  <% ensinos.forEach(function(ensino){ %>
+    <div class="container-elemento">
+      <div class="row p-2 m-2 justify-content-center">
+        <div class="p-0 m-0 col-md-6 text-center">
+          <img class='rounded img-fluid img-evento p-0' id='showImage' src="<%= ensino.URL %>"><br>
+        </div>
+        <form data="/admin/edit/ensino/<%= ensino._id %>" id="update" class='text-center col-12 col-lg-6'>
+            <input class="form-control m-1" type="text" name="titulo" value="<%= ensino.titulo %>" required/>
+            <textarea class="form-control m-1" name="subdescricao" id="" rows="10" placeholder="Descrição"><%= ensino.subdescricao %></textarea>
+            <textarea name="descricao" class="form-control m-1" id="exampleFormControlTextarea1" rows="10"><%= ensino.descricao %></textarea>
+            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+        </form>
+        
+        <form data="/admin/ensino/upload/<%= ensino._id %>" id="sendImg" class='text-left col-12'>
+          <input class="form-control-file m-2"  id='input-file' type="file" name="image" enctype="multipart/form-data">
+          <button class='btn p-0' id='sendImgBtn'><i class="far fa-save fa-2x"></i></button>
+        </form>
+        <form class='col-12 text-right'>
+            <button class='btn btn-delete deletar p-0' data="/admin/ensino/<%= ensino._id %>/delete"><i class="fas fa-trash-alt fa-2x"></i></button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<% include ./partials/footer %>

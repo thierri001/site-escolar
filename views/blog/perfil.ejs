@@ -1,0 +1,66 @@
+<% include ./partials/header.ejs %>
+<div class="main">
+    <div class="row w-100 mt-5 mx-0">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#perfil" data-toggle="tab" class="nav-link active">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Editar</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="perfil">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <% if(perfil.nome !== null && perfil.nome !== undefined && perfil.nome !== ""){ %>
+                            <h6>Nome</h6>
+                            <p class='pl-2'>
+                                <%= perfil.nome %>
+                            </p>
+                            <% } %>
+                            <% if(perfil.email !== null && perfil.email !== undefined && perfil.email !== ""){ %>
+                            <h6>Email</h6>
+                            <p class='pl-2'><%= perfil.email %></p>
+                            <% } %>
+                            <% if(perfil.escola !== null && perfil.escola !== undefined && perfil.escola !== ""){ %>
+                            <h6>Escola</h6>
+                            <p class="pl-2"><%= perfil.escola %></p>
+                            <% } %>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class='text-center'>Trofeus <i class="fas fa-trophy pl-2"></i></h4>
+                            <% perfil.trofeus.forEach((trofeu)=>{ %>
+                                <div class="m-1 d-inline-block text-center">
+                                    <img src="<%= trofeu.imagem %>" class='img-float' style="width: 3.5rem; height: 3.5rem;">
+                                    <h6 class='text-center'><%= trofeu.nome %></h6>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="edit">
+                    <form data="/blog/perfil/<%=perfil.usuario.username%>/<%=perfil._id%>" class='text-center' id='updatePerfil' role='form'>
+                        <input class="form-control m-1" type="text" name='nome' placeholder="Qual é o seu nome? =D" value='<%=perfil.nome%>'>
+                        <input class="form-control m-1" type="text" name='escola' placeholder="Em qual escola estuda?" value='<%=perfil.escola%>'>
+                        <input class="form-control m-1" type="email" name='email' placeholder="Qual seu email? Se não quiser que vejam, deixe em branco!" value='<%=perfil.email%>'>
+                        <button class='btn btn-success'>Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="<%=usuario.foto%>" class="mx-auto img-fluid img-circle border border-secondary rounded d-block" alt="avatar" style="width: 15rem;height: 15rem;">
+            <div class="m-2 display-6">Trocar foto de perfil</div>
+            <label class="custom-file">
+                <span class="custom-file-control border border-success p-2">Escolher arquivo</span>
+                <form data="/post/perfil/<%=perfil.usuario.username%>/foto"  id="sendImg" class='mt-3 mr-5 text-center col-md-12'>
+                    <input class="form-control-file m-2 d-none" type="file" name="image" id='input-file'/>
+                    <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                </form>
+            </label>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer.ejs %>

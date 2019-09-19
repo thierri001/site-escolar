@@ -1,0 +1,41 @@
+<% include ./partials/header.ejs %>
+<div class="main main-auto">
+	<div class="container">
+    <div class="col-md-12 col-lg-6 mx-auto">
+		<div class="form-bot mx-auto my-5">
+			<h1 class="font-form-bot">Marque sua visita!</h1>
+				<div class="font-form pt-5">
+					<div><a href='https://www.google.com/maps/place/Escola+Master/@-15.9077756,-47.7641344,17z/data=!3m1!4b1!4m5!3m4!1s0x935a1f8702cbf41d:0xb378434566a4cc2!8m2!3d-15.9077808!4d-47.7619457'><%=contato.location%></a></div>
+					<div class="pt-2"><%=contato.email%></div>
+					<div class="pt-2"><%=contato.telefone1%></div>
+					<div><%=contato.telefone2%></div>
+					<div><%=contato.telefone3%></div>
+					<div class="pt-4">HORÁRIO DE FUNCIONAMENTO</div>
+					<div>Seg - Sex: 7:00 - 12:00 / 13:00 - 18:00</div>
+				</div>
+				<form class='form-group' data="/contato/mensagem" id='new'>
+					  <div class="form-row pt-4">
+					    <div class="col-md-12 mb-3">
+					      <input type='text' name="message[nome]" class="form-control form-control-sm" id="validationTooltip01" placeholder="Nome e sobrenome" autocomplete="off" required>
+					    </div>
+						 <div class="col-md-12 mb-3">
+					      <input type='email' name="message[email]" class="form-control form-control-sm" placeholder="Email" autocomplete="off" required>
+					    </div>
+					    <div class="col-md-12 mb-3">
+					      <input type='text' minlength="9" maxlength="22" name="message[telefone]" class="form-control form-control-sm" placeholder="Telefone para contato" autocomplete="off"  required>
+					    </div>
+					    <div class="col-md-12 mb-3">
+						  <textarea class="form-control noresize" rows="5" name='message[texto]' maxlength="250" autocomplete="off" placeholder='Olá! Meu nome é _________ e eu gostaria de marcar uma visita para o dia:___/___/___.' required></textarea>
+						</div>
+					  </div>
+				  		<button class="btn btn-em" type="submit">Enviar mensagem</button>
+			</form>
+			<div class="font-form">
+			<a class="sm-ico" href="<%=contato.yt%>"><i class="fab fa-youtube fa-2x yt"></i></a>
+			<a class="sm-ico" href="<%=contato.ig%>"><i class="fab fa-instagram fa-2x ig"></i></a>
+			<a class="sm-ico" href="<%=contato.fb%>"><i class="fab fa-facebook-square fa-2x fb"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ./partials/footer.ejs %>

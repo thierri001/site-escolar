@@ -1,0 +1,95 @@
+<% include ./partials/header %>
+<div class="main mb-5">
+    <div class="row border border-secondary justify-content-center p-2">
+        <div class="col-12 text-center justify-content-center">
+            <div class="col-md-4 mx-auto p-0">
+                    <img class='capa rounded img-fluid img-evento p-0' src="<%= evento.capa %>"><br>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <div class="col-md-6 mx-auto p-0">
+            <form data="/admin/eventos/upload/capa/<%= evento._id %>"  id="sendImg" class='mt-3 col-md-12'>
+                <div class="row">
+                    <div class="col-md">
+                        <input class="form-control-file m-2" type="file" name="image" id='input-file' required/>
+                    </div>
+                    <div class="col-1">
+                        <button class='btn p-0' id='sendImgBtn'><i class="far fa-save fa-2x"></i></button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col-12 pt-3">
+            <div class="col-md-5 mx-auto text-center">
+                <form data="/admin/evento/<%= evento._id %>" id="update" class='text-center'>
+                    <div class="form-group text-center">
+                      <input class="form-control m-1" type="text" name='titulo' value="<%= evento.titulo %>" id='tituloUpdate' placeholder="Título do evento">
+                    </div>
+                    <div class="form-group">
+                      <textarea name="descricao" class="form-control m-1" id="exampleFormControlTextarea1" rows="10" placeholder="Descrição do evento"><%= evento.descricao %></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h6 class='text-center'>Sempre dê preferência a tamanhos de imagem padronizados, para um design mais elegante.</h6>
+    </div>
+    <div class="row edicao-fotos border">
+        <div class="col-md-4 p-del-form border" id='edicao-fotos'>
+            <div class="row botoes-edicao-fotos align-items-center">
+                <% if (evento.fotos.length > 0){ %>
+                <button class='btn btn-gerenciamento selectFotos m-1'>Selecionar fotos</button>
+                <% } else { %>
+                <button class='btn btn-gerenciamento selectFotos m-1 d-none'>Selecionar fotos</button>
+                <% } %>
+                <form data="/admin/eventos/upload/fotos/<%=evento._id%>" id="sendImgArr">
+                    <label class='btn-gerenciamento m-1' id='labelArrUpload' for="sendImgArrInput" class='p-2 m-3'>Adicionar Imagens</label>
+                    <input class="form-control-file m-2" type="file" name="imagens" id='sendImgArrInput' multiple/>
+                </form>
+                <button form='sendImgArr' class='p-0 btn-arr-upload' id='sendImgBtn'><i class="far fa-save fa-2x"></i></button>
+            </div>
+            <div class="row">
+                <div id='label-input-content' class="justify-content-center" style='display: none;'></div>
+            </div>
+            <% if (evento.fotos.length > 0){ %>
+            <div class="containerFotos padding-eventos justify-content-between align-items-center border mt-4 mb-2">
+                <% evento.fotos.forEach((foto)=>{ %>
+                    <div class="fotoEventoContainer">
+                        <a class='fotoEventoTag' href='#'>
+                        <div class="back-foto-evento">
+                            <img src="<%= foto.URL %>" id='<%= foto._id %>' desc='<%= foto.descricao %>' nome='<%= foto.nome %>' class='fotoEvento img-fluid'></img>
+                        </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+            <% } else { %>
+            <div class="containerFotos d-none"></div>
+            <h3 class='text-center mt-5' id='emptyBox'>Não há nenhuma foto desse evento ainda!</h3>
+            <% } %>
+        </div>
+        <div class="col-md-8 row border pt-2 m-0">
+            <div class="col-md-7 text-center m-0 p-0">
+                <img src="/uploads/default.png" alt="Foto em destaque" id="fotoHighlight" idFoto='' class='img-fluid border'>
+            </div>
+            <div class="col-md-5 m-0 p-0">
+            <form data-part='/admin/eventos/<%= evento._id %>/images/' data="" id="updateFoto" class='updateFoto text-center'>
+                <div class="form-group text-center">
+                    <input class="form-control m-1" type="text" name='nome' id="nomeHighlight" placeholder="Título da foto">
+                </div>
+                <div class="form-group">
+                    <textarea name="descricao" class="form-control m-1" rows="10" id="descricaoHighlight" placeholder="Descrição da foto"></textarea>
+                </div>
+                    <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <a href="/admin/edit/eventos" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ./partials/footer %>

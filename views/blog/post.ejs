@@ -1,0 +1,162 @@
+<% include ./partials/header.ejs %>
+<div class="main p-1">
+    <div class="row border justify-content-center w-100 mx-0 mb-0 mt-2">
+            <h2 class='display-5 text-center text-dark align-self-start w-100'><%= post.titulo %></h2>
+            <% if(currentUser.tipoConta == 1 && assunto.length > 0 && typeof assunto != undefined){ %>
+                <h6 class='text-center text-info w-100'><%= post.assunto %></h6>
+                <form data="/blog/mudaAssunto/<%= post._id %>" id='assuntoChange' class='text-center mb-5'>
+                    <h6 class='mt-2'>Mudar assunto do post</h6>
+                    <select name="assunto">
+                        <option value=""></option>
+                    <% assunto.forEach((assunto)=>{ %>
+                        <option value="<%=assunto.assunto%>"><%= assunto.assunto %></option>
+                    <% }); %>
+                    </select>
+                </form>
+            <% } else { %>
+                <h6 class='text-center text-info mb-1'><%= post.assunto %></h6>
+            <% } %>
+    </div>
+    <div class="row border-top p-1 my-2 mx-0">
+
+        <div class="col-md-2 border-right border-dark p-3">
+            <p class='w-100 text-center'><img class='img-fluid img-autor-post border border-danger' src="<%=foto%>" alt="<%=post.autor.username%>"></p>
+            <p class='col-12 text-center text-dark'><b><a class=' ml-2 cmbtn btn-perfil text-dark' href='/blog/perfil/<%= post.autor.username %>'><%= post.autor.username %></a></b></p>
+            <p class='col-12 text-center'></p>
+            <% if(currentUser){ %>
+                <p class='col-12 text-center'><a class='text-success' href='/blog/<%=post._id%>/like' id='likes'><i class="fas fa-thumbs-up"></i></a> <%= post.likes %></p>
+            <% }else{ %>
+                <p class='col-12 text-center'><i class="fas fa-thumbs-up p-0 p-sm-2"></i><%= post.likes %></p>
+            <% } %>
+            <% if(currentUser && post.autor.id.equals(currentUser._id)){ %>
+            <a href='/blog/post/edit/<%=post._id%>' class='cmbtn2'><i class="far fa-edit fa-2x"></i></a>
+            <% } %>
+            <% if(currentUser && currentUser.tipoConta === 1 || currentUser && post.autor.id.equals(currentUser._id)){ %>
+            <form data="/blog/post/delete/<%=post._id%>" class='deletarPost float-right'>
+                <button class='btn btn-delete p-0'><i class="fas fa-trash-alt fa-2x"></i></button>
+            </form>
+            <% } %>
+        </div>
+        <div class="col-md-10 p-0 px-md-2">
+            <div class="jumbotron p-0">
+                <%- post.texto %>
+            </div>
+        </div>
+        <div class="row border-bottom w-100 m-0">
+            <h6 class="ml-auto"><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth()+1 %>/<%= post.data_criacao.getFullYear() %> - <%= post.data_criacao.getHours() %>:<%= post.data_criacao.getMinutes() %>:<%= post.data_criacao.getSeconds() %></h6>
+        </div>
+    <div class="row comments justify-content-center w-100 mt-4 mx-0">
+        <% if(post.comentarios.length >0){ %>
+        <% post.comentarios.forEach((comentario)=>{ %>
+        <div class="col-12 row border-top comment mb-5 p-0">
+            <div class="col-md-2 border-right border-dark text-center p-3">
+                <!-- <div class="row p-3"> -->
+                    <p class='w-100 text-center'><img class='img-fluid img-autor-post border border-danger' src="<%=comentario.autor.foto%>" alt="<%=comentario.autor.username%>"></p>
+                <a href="/blog/perfil/<%=comentario.autor.username%>" class='cmbtn'><%=comentario.autor.username%></a>
+                <p class='text-center p-0'>
+                    <% if(currentUser && currentUser.tipo === 1) { %>
+                        <a class='m-1' href='/blog/<%=post._id%>/comentario/like/<%=comentario._id%>' id='likes'><i class="fas fa-thumbs-up p-0 p-sm-2"></i></a>
+                    <% } else { %>
+                        <i class="fas fa-thumbs-up p-0 p-sm-2"></i>
+                    <% } %>
+                    <%=comentario.likes%>
+                </p>
+                <% if(currentUser && comentario.autor.id.equals(currentUser._id) || currentUser.tipo === 2){ %>
+                    <button type="button" class="btn float-left p-0" data-toggle="modal" data-target="#modalComentario" dataUrl='/blog/<%=post._id%>/comentario/edit/<%=comentario._id%>'>
+                        <i class="far fa-edit fa-2x pb-2 pb-sm-0"></i>
+                    </button>
+                <% } %>
+                <% if(currentUser && currentUser.tipoConta === 1 || currentUser && post.autor.id.equals(currentUser._id)){ %>
+                <form class='float-right'>
+                    <button data="/blog/<%=post._id%>/comentario/delete/<%=comentario._id%>" class='deletarComment btn btn-delete p-0'><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+                <% } %>
+                <!-- </div> -->
+            </div>
+            <div class="col-md-10 col-comentario">
+                <div class="col-12 p-0" id='comentarioTexto'>
+                        <%-comentario.texto%>
+                </div>
+            </div>
+            <% if(comentario.data_criacao !== undefined){ %>
+            <div class="row border-bottom w-100 m-0">
+                <h6 class="ml-auto"><%= comentario.data_criacao.getDate() %>/<%= comentario.data_criacao.getMonth()+1 %>/<%= comentario.data_criacao.getFullYear() %> - <%=comentario.data_criacao.getHours() %>:<%= comentario.data_criacao.getMinutes() %>:<%= comentario.data_criacao.getSeconds() %></h6>
+            </div>
+            <% } %>
+        </div>
+        <% }); %>
+              <!-- Modal -->
+              <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content" style='background: transparent; border: none;'>
+                    <div class="modal-body" style='background: transparent; border: none;'>
+                        <form data="" id='formModalComentario'>
+                            <textarea id='editCommentBox' name='texto'>
+                            </textarea>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center" style='background: transparent; border: none;'>
+                        <button type="button" class="btn btn-primary ml-2 mt-1" id='formModalComentarioBtn' data-dismiss="modal">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <% } %>
+    </div>
+    <% if(currentUser && currentUser.tipoConta == 1){ %>
+    <div class="col-md-7 mx-auto mb-5 p-0">
+        <form data="/blog/<%=post._id%>/comment/new" id="newComment">
+            <textarea id='commentBox' name='texto'>
+            </textarea>
+        </form>
+        <div class="row justify-content-center m-2">
+            <button form='newComment' class='btn btn-secondary'>Enviar!</button>
+        </div>
+        <% } %>
+            <script type='text/javascript'>
+            $33('#commentBox').summernote({
+                placeholder: 'Faça seu comentário!',
+                lang: 'pt-BR',
+                tabsize: 2,
+                height: 180,
+                toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']]],
+                callbacks: {
+                    onKeydown: function (e) { 
+                        var max = 1000;
+                        var t = e.currentTarget.innerText; 
+                        if (t.trim().length >= max) {
+                            //delete keys, arrow keys, copy, cut
+                            if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                            e.preventDefault(); 
+                        } 
+                    },
+                    onKeyup: function (e) {
+                        var max = 1000;
+                        var t = e.currentTarget.innerText;
+                        $('#maxContentPost').text(max - t.trim().length);
+                    },
+                    onPaste: function (e) {
+                        var max = 1000;
+                        var t = e.currentTarget.innerText;
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        var maxPaste = bufferText.length;
+                        if(t.length + bufferText.length > max){
+                            maxPaste = max - t.length;
+                        }
+                        if(maxPaste > 0){
+                            document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                        }
+                        $('#maxContentPost').text(max - t.length);
+                    }
+                }
+            });
+            </script>
+    </div>
+</div>
+<% include ./partials/footer.ejs %>

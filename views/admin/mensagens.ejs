@@ -1,0 +1,28 @@
+<% include ./partials/header %>
+<div class="main">
+    <div class="row justify-content-center">
+        <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="container-mensagens">
+        <% if(mensagens.length > 0) { %>
+        <ul class='p-0'>
+        <% mensagens.forEach((mensagem)=>{ %>
+        <li class='container-elemento'>
+            <div class="row p-2 align-items-center justify-content-between m-2">
+            <a href='/admin/mensagens/<%=mensagem._id%>' class='cmbtn col-md-4 col-12'>
+                <h5><%= mensagem.nome %></h5>
+            </a>
+            <h5 class='col-md-4 col-12'><%= mensagem.data_criacao.getDate() %>/<%= mensagem.data_criacao.getMonth() %>/<%= mensagem.data_criacao.getFullYear() %></h5>
+            <form class='text-right col-md-4 col-12'>
+                <button class='btn btn-delete deletar p-0' data="/admin/mensagem/<%=mensagem._id%>"><i class="fas fa-trash-alt fa-2x"></i></button>
+            </form>
+            </div>
+        </li>
+        <% }) %>
+        </ul>
+        <% } else{ %>
+        <h1 class='text-center m-5'>Parece que não temos mensagens!</h1>
+        <% } %>
+    </div>
+</div>
+<% include ./partials/footer %>

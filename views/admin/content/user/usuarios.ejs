@@ -1,0 +1,32 @@
+<% include ../../partials/header %>
+    <div class="main">
+    <div class="row justify-content-left pl-3">
+        <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+        <a href="/admin/usuario/new" class="cmbtn btn btn-gerenciamento m-1"><i class="fas fa-plus pr-2"></i>Novo usuario</a>
+    </div>
+    <h1 class='text-center'>Logado como <strong class='pl-2'><%= currentUser.username %></strong></h1>
+        <% usuarios.forEach(function(usuario){ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center justify-content-between m-2">
+            <% var numCol = 3; %>
+            <h1 class='col-md-<%=numCol%> col-12'><%= usuario.username %></h1> 
+            <% if(currentUser.username != usuario.username){ %>
+            <% var numCol = 2; %>
+                <% if(currentUser.isAdmin){ %>
+                <form class='order-4 text-right col-md-<%=numCol%> col-12'>
+                    <button class='btn btn-delete deletar p-0' data="/admin/usuario/<%= usuario._id %>/delete"><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+                <% } %>
+            <% } %>
+            <% if(currentUser.isAdmin || currentUser._id.equals(usuario._id)){ %>
+            <a href="/admin/usuario/<%= usuario._id %>/edit" class="cmbtn text-center col-md-<%=numCol%> col-12"><h4>Editar</h4></a>
+            <% } %>
+            <% if(currentUser.isAdmin){ %>
+            <a href="/admin/usuario/<%= usuario._id %>/permissoes" class="cmbtn text-center col-md-<%=numCol%> col-12"><h4>Permissões</h4></a>
+            <% } %>
+            </div>
+        </div>
+            <% }) %>
+    
+    </div>
+<% include ../../partials/header %>

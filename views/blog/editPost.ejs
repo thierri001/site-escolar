@@ -1,0 +1,73 @@
+<% include ./partials/header.ejs %>
+<div class="main">
+    <div class="row w-100 p-1 pt-4 px-4">
+        <div class="col-md-3 border">
+            <h1 class="display-5 text-center mb-5 pb-2"><%= post.titulo %></h1>
+            <h2 class='text-center text-info mb-5'><%= post.assunto %></h2>
+            <p class='col-12'><b><%= post.autor.username %></b></p>
+            <p class='col-12'><%= post.data_criacao.getDate() %>/<%= post.data_criacao.getMonth() %>/<%= post.data_criacao.getFullYear() %></p>
+            <p class='col-12'><%= post.likes %> Gostei</p>
+            <% if(currentUser && post.autor.id.equals(currentUser._id)){ %>
+                <form data="/blog/post/delete/<%=post._id%>" class='deletarPost float-right'>
+                    <button class='btn btn-delete p-0'><i class="fas fa-trash-alt fa-2x"></i></button>
+                </form>
+                <% } %>
+            </div>
+            <div class="col-md-9 text-center">
+                <form data="/blog/post/edit/<%= post._id %>" class='p-0 m-0' id='updatePost'>
+                    <h2 class='text-center'>Descrição</h2>
+                    <textarea name="descricao" class="form-control m-1" maxlength="120" rows="5"><%= post.descricao %></textarea>
+                    <textarea id='postBox' name='texto' class='p-0 m-0'>
+                    <%- post.texto %>
+                    </textarea>
+                </form>
+                <button form='updatePost' class='btn btn-success m-2'>Salvar</button>
+        </div>
+    </div>
+        <script type='text/javascript'>
+            $33('#postBox').summernote({
+            lang: 'pt-BR',
+            tabsize: 2,
+            height: 180,
+            toolbar: [['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']]],
+            callbacks: {
+                    onKeydown: function (e) { 
+                        var max = 2000;
+                        var t = e.currentTarget.innerText; 
+                        if (t.trim().length >= max) {
+                            //delete keys, arrow keys, copy, cut
+                            if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                            e.preventDefault(); 
+                        } 
+                    },
+                    onKeyup: function (e) {
+                        var max = 2000;
+                        var t = e.currentTarget.innerText;
+                        $('#maxContentPost').text(max - t.trim().length);
+                    },
+                    onPaste: function (e) {
+                        var max = 2000;
+                        var t = e.currentTarget.innerText;
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        var maxPaste = bufferText.length;
+                        if(t.length + bufferText.length > max){
+                            maxPaste = max - t.length;
+                        }
+                        if(maxPaste > 0){
+                            document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                        }
+                        $('#maxContentPost').text(max - t.length);
+                    }
+                }
+        });
+        </script>
+    </div>
+</div>
+<% include ./partials/footer.ejs %>

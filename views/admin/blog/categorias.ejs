@@ -1,0 +1,80 @@
+<% include ../partials/header %>
+<div class="main">
+        <h1 class='text-center m-5'>Criação de categorias</h1>
+        <div class="form-document row justify-content-center border border-secondary">
+            <h2 class='text-center'>Nova categoria</h2>
+            <div class="form-group m-2 text-center col-12">
+                <form data="/admin/blog/categoria" id='new' class='col-md-3 m-auto'>
+                <input type="text" placeholder='Categoria' name='categoria' class='col-12' required>
+                <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center w-100">
+            <a href='#' data-toggle="modal" data-target="#ModalLongo">Como adicionar icones! <i class="material-icons p-2">lightbulb_outline</i></a>
+        </div>
+    <% if(categorias.length > 0) { %>
+        <div class="container-categorias">
+            <% categorias.forEach((categoria)=>{ %>
+                <div class="container-elemento">
+                    <div class="row p-2 align-items-center justify-content-between m-2">
+                        <div class='col-md col-6'><h5><span class='pr-2'><%-categoria.icone%></span><%= categoria.categoria %></h5></div>
+                        <form data="/admin/blog/<%=categoria._id%>/icone" class='col-md text-center' id='update'>
+                            <input type="text" placeholder='Icone' name='icone' class='col-12' required>
+                            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                        </form>
+                        <div class="col-md">
+                                <a class='btn btn-secondary cmbtn' href="/admin/blog/<%=categoria._id%>/assuntos">Editar assuntos</a>
+                        </div>
+                        <h5 class='col-md'>Ordem: <%=categoria.ordem%></h5>
+                        <form data="/admin/blog/<%=categoria._id%>/ordem" class='text-center' id='update'>
+                            <select name="ordem" required>
+                                <% for(var i=0;i < totalDeCategorias;i++){ %>
+                                <option value='0'></option>
+                                <option value='<%=i+1%>'><%=i+1%></option>
+                                <% } %>
+                            </select>
+                            <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                        </form>
+                        <form class='col-md col-6 text-right'>
+                            <button class='btn btn-delete deletar p-0' data='/admin/blog/categorias/<%=categoria._id%>'><i class="fas fa-trash-alt fa-2x"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+    <% } %>
+    <div class="row justify-content-center">
+            <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="modal fade" id="ModalLongo" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+        <div class="modal-dialog mx-auto mt-5" role="document">
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalLongoExemplo">Adicionando icones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Contamos com dois repositórios diferentes, o <b>Font Awesome</b> e o <b>Materialize</b>.</p><br>
+                    <p>Para <b>adicionar</b> um ícone do tipo Font Awesome, precisamos escolher o icone dentre o 
+                        <a href="https://fontawesome.com/icons?d=gallery" target="_blank">repositório</a>
+                         e adicionar ao espaço de icone da nossa categoria ou assunto. <br>
+                         O Font Awesome tem outras opções para <b>tamanho</b> de icones!
+                         <p>Tamanho 2x , 3x , 5x  e 7x .</p>
+                         <p><\i class="fab fa-500px fa-2x p-2"><\/i></p>
+                    </p><br>
+                    <p>Para <b>adicionar</b> um ícone do tipo Materialize, precisamos escolher o icone dentre o 
+                        <a href="https://materializecss.com/icons.html" target="_blank">repositório</a>
+                            e adicionar <p>'<\i class="material-icons" >(nome do icone)<\i>'</p> ao espaço de icone da nossa categoria ou assunto. <br>
+                            O Materialize tem outras opções para <b>tamanho</b> de icones!
+                            Tamanho tiny (muito pequeno), small (pequeno), medium (médio) e large (grande).<br>
+                            <p><\i class="medium material-icons">(nome do icone)<\/i></p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

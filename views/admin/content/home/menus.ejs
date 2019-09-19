@@ -1,0 +1,77 @@
+<% include ../../partials/header %>
+<div class="main">
+    <h1 class='text-center m-5'>Criação de menus</h1>
+    <div class="row justify-content-left pl-3">
+        <a href="/admin/home" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="form-menus row justify-content-center border border-secondary">
+        <form data="/admin/home/menus" id="new" class='col-md-12 justify-items-between'>
+        <div class="form-group m-2 text-center">
+            <input type="text" placeholder='Nome do menu/botão' name='nome' required>
+        </div>
+        <div class="form-group m-2 text-center">
+            <label>Selecione um link para o botão</label>
+            <% if(paginas.length > 0) { %>
+            <div class="selectURL">
+            <h5>Páginas criadas</h5>
+                  <select name="url">
+                <% paginas.forEach((pagina)=>{ %>
+                    <option value="/pagina/<%=pagina.id%>"><%= pagina.name %></option>
+                <% }) %>
+                  </select>
+            <button class='mudaInput' selecturl=''>Digitar url</button>
+            </div>
+        </div>
+        <% }else{ %>
+        <div class="form-group m-2 text-center">
+            <div class="inputURL">
+              <input type="text" placeholder='Digite uma url' name='url'>
+            <button class='mudaInput' inputurl=''>Selecionar páginas</button>
+            </div>
+        </div>
+        <% } %>
+        <div class="form-group m-2 text-center">
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+        </div>
+        </form>
+    </div>
+    <div class="container-menus">
+    <% menus.forEach((menu)=>{ %>
+        <div class="container-elemento">
+            <div class="row p-2 align-items-center justify-content-between m-2">
+                <h6 class='col-md'><%- menu.nome %></h6>
+                <h6 class='col-md-2 scroll-x'><a href='<%= menu.url %>'><%= menu.url %></a></h6>
+                <h6 class='col-md'>Ordem de exibição : <%=menu.ordem%></h6>
+                <div class="col-md">
+                    <form data="/admin/home/<%=menu._id%>/ordem" class='text-md-center' id='update'>
+                        <select name="ordem">
+                            <option value='0'></option>
+                            <% for(var i=0;i < totalDeMenus;i++){ %>
+                            <option value='<%=i+1%>'><%=i+1%></option>
+                            <% } %>
+                        </select>
+                        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+                    </form>
+                </div>
+                <div class="col-md">
+                    <% if(menu.plataformas){ %>
+                    <form data="/admin/home/menus/plataformas/<%=menu._id%>" id='update'>
+                        <button class='btn btn-secondary'>Retirar plataformas</button>
+                    </form>
+                    <% } else { %>
+                    <form data="/admin/home/menus/plataformas/<%=menu._id%>" id='update'>
+                        <button class='btn btn-primary'>Menu plataformas</button>
+                    </form>
+                    <% } %>
+                </div>
+                <div class="col-md-1">
+                    <form class='text-right'>
+                        <button data='/admin/home/menus/<%=menu.id%>' class='btn btn-delete deletar p-0'><i class="fas fa-trash-alt fa-2x"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+    </div>
+</div>
+<% include ../../partials/footer %>

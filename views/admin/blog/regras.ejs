@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+<div class="main">
+    <h1 class='text-center mb-4'>Regras para utilização do Blog</h1>
+    <div class="row justify-content-center">
+    <form data="/admin/blog/regras" id="update" class='text-center col-12 col-lg-6'>
+        <textarea class="form-control m-1" id="exampleFormControlTextarea1" rows="10" name="descricao"><%= regras %></textarea>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </form>
+</div>
+        <div class="row justify-content-center">
+                <a href="/admin/blog" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+        </div>
+</div>
+<% include ../partials/footer %>

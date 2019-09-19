@@ -1,0 +1,48 @@
+<% include ./partials/header %>
+<div class="main">
+    <h1 class='text-center'>Institucional</h1>
+    <div class="row justify-content-left">
+    <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="row justify-content-center">
+    <% Institucional.forEach(function(instituicao){ %>
+        <%  if(instituicao._id == principal){ %>
+            <div class="container-elemento col-md-10 mb-3 order-1">
+                <form data="/admin/edit/instituicao/<%= instituicao._id %>" id="update" class='text-center'>
+                    <input class="form-control m-1" type="text" name="instituicao[titulo]" value="<%= instituicao.titulo %>"/>
+                    <textarea name="instituicao[descricao]" class="form-control m-1" id="exampleFormControlTextarea1" rows="10"><%= instituicao.descricao %></textarea>
+                    <button class='btn'><i class="far fa-save fa-2x"></i></button>
+                </form>
+            </div>
+        <% } %>
+        <%  if(instituicao._id == descricao1){ %>
+        <div class="container-elemento col-md-4 order-2">
+            <form data="/admin/edit/instituicao/<%= instituicao._id %>" id="update">
+                <input class="form-control m-1" type="text" name="instituicao[titulo]" value="<%= instituicao.titulo %>"/>
+                <textarea name="instituicao[descricao]" class="form-control m-1" id="exampleFormControlTextarea1" rows="10"><%= instituicao.descricao %></textarea>
+                <button class='btn'><i class="far fa-save fa-2x"></i></button>
+            </form>
+        </div>
+        <% } %>
+        <%  if(instituicao._id == descricao2){ %>
+        <div class="container-elemento col-md-4 order-3">
+            <form data="/admin/edit/instituicao/<%= instituicao._id %>" id="update">
+                <input class="form-control m-1" type="text" name="instituicao[titulo]" value="<%= instituicao.titulo %>"/>
+                <textarea name="instituicao[descricao]" class="form-control m-1" id="exampleFormControlTextarea1" rows="10"><%= instituicao.descricao %></textarea>
+                <button class='btn'><i class="far fa-save fa-2x"></i></button>
+            </form>
+        </div>
+        <% } %>
+        <%  if(instituicao._id == descricao3){ %>
+        <div class="container-elemento col-md-4 order-4">
+            <form data="/admin/edit/instituicao/<%= instituicao._id %>" id="update">
+                <input class="form-control m-1" type="text" name="instituicao[titulo]" value="<%= instituicao.titulo %>"/>
+                <textarea name="instituicao[descricao]" class="form-control m-1" id="exampleFormControlTextarea1" rows="10"><%= instituicao.descricao %></textarea>
+                <button class='btn'><i class="far fa-save fa-2x"></i></button>
+            </form>
+        </div>
+        <% } %>
+            <% }) %>
+    </div>
+</div>
+<% include ./partials/footer %>

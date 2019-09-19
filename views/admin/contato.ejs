@@ -1,0 +1,42 @@
+<% include ./partials/header %>
+<div class="main">
+    <form data='/admin/contato' id='update' class='row text-center justify-content-center align-items-center col-md-8 col-lg-4 mx-auto'>
+        <label for="">Telefone 1</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[telefone1]" value='<%=contato.telefone1%>'/>
+        </div>
+        <label for="">Telefone 2</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[telefone2]" value='<%=contato.telefone2%>'/>
+        </div>
+        <label for="">Telefone 3</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[telefone3]" value='<%=contato.telefone3%>'/>
+        </div>
+        <label for="">Email</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="email" name="contato[email]" value='<%=contato.email%>'/>
+        </div>
+        <label for="">Endereço</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[location]" value='<%=contato.location%>'/>
+        </div>
+        <label for="">URL canal YouTube</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[yt]" value='<%=contato.yt%>'/>
+        </div>
+        <label for="">URL página instagram</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[ig]" value='<%=contato.ig%>'/>
+        </div>
+        <label for="">URL página Facebook</label>
+        <div class="form-group text-center justify-content-center col-12">
+            <input class="form-control m-1" type="text" name="contato[fb]" value='<%=contato.fb%>'/>
+        </div>
+        <button class='btn p-0'><i class="far fa-save fa-2x"></i></button>
+    </form>
+    <div class="row justify-content-center">
+        <a href="/admin/gerenciamento" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+</div>
+<% include ./partials/footer %>

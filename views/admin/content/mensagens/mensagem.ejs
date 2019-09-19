@@ -1,0 +1,45 @@
+<% include ../../partials/header %>
+<div class="main">
+    <div class="row justify-content-center">
+        <a href="/admin/mensagens" class='cmbtn btn btn-gerenciamento m-1'>Voltar</a>
+    </div>
+    <div class="container-mensagens m-5">
+        <div class="row justify-content-center text-center align-items-center">
+            <table border="1" cellpadding="0" cellspacing="0" width="100%" class='col-md-7'>
+             <tr>
+              <td>
+                 Nome: 
+              </td>
+              <td>
+               <%= mensagem.nome %>
+              </td>
+             </tr>
+             <tr>
+              <td>
+                 Mensagem: 
+              </td>
+              <td>
+               <p><%= mensagem.texto %></p>
+              </td>
+             </tr>
+             <tr>
+              <td>
+                 Email: 
+              </td>
+              <td>
+               <%= mensagem.email %>
+              </td>
+             </tr>
+             <tr>
+              <td>
+                 Contato: 
+              </td>
+              <td>
+               <%= mensagem.telefone %>
+              </td>
+             </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<% include ../../partials/footer %>

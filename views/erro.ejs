@@ -1,0 +1,10 @@
+<% include ./partials/header-erro.ejs %>
+<div class='main'>
+    <div class="container">
+<h1 class='text-center bg-font-master'>Ocorreu um erro! A página pode não existir mais! =(</h1>
+<% if(locals.message){ %>
+<p class='text-center'>Por favor, contate o administrador com esse código:</p><br>
+<p class='text-center bg-font-master'><%=message%></p>
+<% } %>
+</div>
+<% include ./partials/footer.ejs %>
